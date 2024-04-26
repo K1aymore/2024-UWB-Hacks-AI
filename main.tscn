@@ -1,4 +1,8 @@
-[gd_scene format=3 uid="uid://ds6tba53kruv4"]
+[gd_scene load_steps=4 format=3 uid="uid://ds6tba53kruv4"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_ipjbi"]
+[ext_resource type="PackedScene" uid="uid://n8hkxfm0e8go" path="res://card.tscn" id="2_330lw"]
+[ext_resource type="Script" path="res://hand.gd" id="2_ug72y"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -7,3 +11,106 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ipjbi")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0557289, 0.123304, 0.046265, 1)
+
+[node name="Deck" type="Node2D" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="Card" parent="Deck" instance=ExtResource("2_330lw")]
+position = Vector2(960, 810)
+title = "Fir Tree"
+flavorText = "Grows tall"
+green = 10
+water = 5
+energyProduction = 3
+
+[node name="Card2" parent="Deck" instance=ExtResource("2_330lw")]
+position = Vector2(960, 810)
+title = "Fir Tree"
+flavorText = "Grows tall"
+green = 10
+water = 5
+energyProduction = 3
+
+[node name="Card3" parent="Deck" instance=ExtResource("2_330lw")]
+position = Vector2(960, 810)
+title = "Fir Tree"
+flavorText = "Grows tall"
+green = 10
+water = 5
+energyProduction = 3
+
+[node name="Card4" parent="Deck" instance=ExtResource("2_330lw")]
+position = Vector2(960, 810)
+title = "Fir Tree"
+flavorText = "Grows tall"
+green = 10
+water = 5
+energyProduction = 3
+
+[node name="Card5" parent="Deck" instance=ExtResource("2_330lw")]
+position = Vector2(960, 810)
+title = "Fir Tree"
+flavorText = "Grows tall"
+green = 10
+water = 5
+energyProduction = 3
+
+[node name="Card6" parent="Deck" instance=ExtResource("2_330lw")]
+position = Vector2(960, 810)
+title = "Fir Tree"
+flavorText = "Grows tall"
+green = 10
+water = 5
+energyProduction = 3
+
+[node name="Card7" parent="Deck" instance=ExtResource("2_330lw")]
+position = Vector2(960, 810)
+title = "Fir Tree"
+flavorText = "Grows tall"
+green = 10
+water = 5
+energyProduction = 3
+
+[node name="Card8" parent="Deck" instance=ExtResource("2_330lw")]
+position = Vector2(960, 810)
+title = "Fir Tree"
+flavorText = "Grows tall"
+green = 10
+water = 5
+energyProduction = 3
+
+[node name="Card9" parent="Deck" instance=ExtResource("2_330lw")]
+position = Vector2(960, 810)
+title = "Fir Tree"
+flavorText = "Grows tall"
+green = 10
+water = 5
+energyProduction = 3
+
+[node name="Card10" parent="Deck" instance=ExtResource("2_330lw")]
+position = Vector2(960, 810)
+title = "Fir Tree"
+flavorText = "Grows tall"
+green = 10
+water = 5
+energyProduction = 3
+
+[node name="Hand" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(960, 810)
+script = ExtResource("2_ug72y")
+
+[node name="Discard" type="Node2D" parent="."]
+unique_name_in_owner = true
+visible = false

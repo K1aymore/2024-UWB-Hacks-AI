@@ -2,15 +2,14 @@ extends Control
 
 var handMax := 5
 
-var energy : int
-var energyMax : int
-var energyGeneration : int
+var energy := 10
+var energyProduction := 0
 
-var waterTotal : int
-var waterRequirement : int
+var green := 0
+var greenProduction := 0
 
-var green : int
-var greenGeneration : int
+var water := 20
+var waterProduction := 0
 
 
 
@@ -31,9 +30,16 @@ enum CITY {
 
 
 func _ready() -> void:
+	var startingCards := %StartingHand.get_children()
+	startingCards.shuffle()
+	for child in startingCards:
+		addCard(child)
+	
 	newTurn()
 
 
+func endTurn() -> void:
+	newTurn()
 
 
 func newTurn():
@@ -50,8 +56,15 @@ func newTurn():
 		
 		drawCard(%Deck.get_child(0))
 	
-	green += greenGeneration
-	energy += energyGeneration
+	green += greenProduction
+	energy += energyProduction
+	water += waterProduction
+	
+	if water < 0:
+		var waterDeficit = abs(water)
+		greenProduction -= waterDeficit
+		waterProduction += waterDeficit
+		water = 0
 	
 	currentTurn += 1
 	updateLabels()
@@ -59,37 +72,53 @@ func newTurn():
 
 func playCard(card : Card):
 	
+	if card.getEnergyCost() > energy:
+		print("Not enough energy :(")
+		return
+	
 	match card.type:
 		Card.TYPE.PLANT:
-			waterRequirement += card.waterRequirement
-			greenGeneration += card.green
-			energyGeneration += card.energyProduction
+			waterProduction += card.waterProduction
+			greenProduction += card.green
+			energyProduction += card.energyProduction
 		Card.TYPE.ANIMAL:
-			waterRequirement += card.waterRequirement
+			waterProduction += card.waterProduction
 			green += card.green
 		Card.TYPE.WEATHER:
-			waterTotal += card.water
-			greenGeneration += card.green
+			waterProduction += card.waterProduction
+			greenProduction += card.green
 	
 	energy -= card.getEnergyCost()
+	
 	
 	cardsPlayed += 1
 	discardCard(card)
 	updateLabels()
+	
+	if %Hand.get_child_count() == 0:
+		newTurn()
+	
+
+
+
+func addCard(card : Card):
+	card.reparent(%Deck)
+	card.played.connect(playCard)
+	card.recycled.connect(recycleCard)
+
+
 
 
 func recycleCard(card : Card):
-	card.recycled()
+	energy += card.getEnergyCost()
 	discardCard(card)
 	updateLabels()
 
 func discardCard(card : Card):
-	card.discarded()
 	card.reparent(%Discard)
 	updateLabels()
 
 func drawCard(card : Card):
-	card.drawn()
 	card.reparent(%Hand)
 	card.position = %Hand.STARTINGCARDPOS
 	updateLabels()
@@ -97,7 +126,13 @@ func drawCard(card : Card):
 
 func updateLabels():
 	%TurnLabel.text = "Turn: " + str(currentTurn)
-	%EnergyLabel.text = "Energy: " + str(energy)
-	%GreenLabel.text = "Green: " + str(green)
-	%WaterTotalLabel.text = "Water Total: " + str(waterTotal)
-	%WaterRequirementLabel.text = "Water Requirement: " + str(waterRequirement)
+	%CardPlayedLabel.text = "Cards Played: "  + str(cardsPlayed)
+	
+	%EnergyLabel.text = str(energy)
+	%EnergyProdLabel.text = str(energyProduction)
+	%GreenLabel.text = str(green)
+	%GreenProdLabel.text = str(greenProduction)
+	%WaterLabel.text = str(water)
+	%WaterProdLabel.text = str(waterProduction)
+
+

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://ds6tba53kruv4"]
+[gd_scene load_steps=5 format=3 uid="uid://ds6tba53kruv4"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_ipjbi"]
+[ext_resource type="Theme" uid="uid://crsd6qx2yqvr7" path="res://new_theme.tres" id="1_uu4lw"]
 [ext_resource type="PackedScene" uid="uid://n8hkxfm0e8go" path="res://card.tscn" id="2_330lw"]
 [ext_resource type="Script" path="res://hand.gd" id="2_ug72y"]
 
@@ -11,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_uu4lw")
 script = ExtResource("1_ipjbi")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -21,6 +23,41 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0557289, 0.123304, 0.046265, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 39.0
+offset_top = 46.0
+offset_right = 213.0
+offset_bottom = 259.0
+
+[node name="TurnLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Turn: "
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="EnergyLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Energy: "
+
+[node name="GreenLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Green: "
+
+[node name="WaterTotalLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Water Total: "
+
+[node name="WaterRequirementLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Water Requirement:"
 
 [node name="Deck" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -33,6 +70,7 @@ flavorText = "Grows tall"
 green = 10
 water = 5
 energyProduction = 3
+type = 2
 
 [node name="Card2" parent="Deck" instance=ExtResource("2_330lw")]
 position = Vector2(960, 810)

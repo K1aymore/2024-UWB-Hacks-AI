@@ -1,6 +1,6 @@
 extends Control
 
-var handMax := 4
+var handMax := 5
 
 var energy : int
 var energyMax : int
@@ -54,17 +54,18 @@ func newTurn():
 	energy += energyGeneration
 	
 	currentTurn += 1
+	updateLabels()
 
 
 func playCard(card : Card):
 	
 	match card.type:
-		Card.TYPE.FOREST:
-			waterTotal += card.water
+		Card.TYPE.PLANT:
 			waterRequirement += card.waterRequirement
 			greenGeneration += card.green
 			energyGeneration += card.energyProduction
 		Card.TYPE.ANIMAL:
+			waterRequirement += card.waterRequirement
 			green += card.green
 		Card.TYPE.WEATHER:
 			waterTotal += card.water
@@ -74,17 +75,29 @@ func playCard(card : Card):
 	
 	cardsPlayed += 1
 	discardCard(card)
+	updateLabels()
 
 
 func recycleCard(card : Card):
 	card.recycled()
 	discardCard(card)
+	updateLabels()
 
 func discardCard(card : Card):
 	card.discarded()
 	card.reparent(%Discard)
+	updateLabels()
 
 func drawCard(card : Card):
 	card.drawn()
 	card.reparent(%Hand)
 	card.position = %Hand.STARTINGCARDPOS
+	updateLabels()
+
+
+func updateLabels():
+	%TurnLabel.text = "Turn: " + str(currentTurn)
+	%EnergyLabel.text = "Energy: " + str(energy)
+	%GreenLabel.text = "Green: " + str(green)
+	%WaterTotalLabel.text = "Water Total: " + str(waterTotal)
+	%WaterRequirementLabel.text = "Water Requirement: " + str(waterRequirement)

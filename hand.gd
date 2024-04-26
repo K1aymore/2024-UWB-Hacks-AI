@@ -1,6 +1,6 @@
 extends Node2D
 
-const STARTINGCARDPOS := Vector2(1000, 0)
+const STARTINGCARDPOS := Vector2(10000, 0)
 
 func _process(delta: float) -> void:
 	for i in range(get_child_count()):
@@ -12,7 +12,7 @@ func _process(delta: float) -> void:
 func calculatePosition(i: int) -> Vector2:
 	var newPos = Vector2.ZERO
 	
-	var cardWithMargin = Card.WIDTH + 10
+	var cardWithMargin = Card.WIDTH + 30
 	
 	newPos.x = (cardWithMargin * i) - (cardWithMargin * ((get_child_count()-1) / 2.0))
 	

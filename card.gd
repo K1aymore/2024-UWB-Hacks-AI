@@ -57,6 +57,11 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void
 
 
 func getEnergyCost() -> int:
-	var cost := green + energy + water
+	var cost := green + energy
+	
+	if type == TYPE.WEATHER:
+		cost += water
+	else:
+		cost -= water
 	
 	return cost

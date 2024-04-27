@@ -28,3 +28,8 @@ func unpause():
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_store_card_added(card: Card) -> void:
+	$Store.hide()
+	$Game.show()

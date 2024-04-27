@@ -5,13 +5,18 @@ var textPopupScene = preload("res://text_popup.tscn")
 
 var handMax := 5
 
-var energy := 10
+
+const STARTING_ENERGY = 15
+const STARTING_WATER = 20
+const STARTING_TARGET_GREEN = 500
+
+var energy := STARTING_ENERGY
 var energyProduction := 0
 
 var green := 0
 var greenProduction := 0
 
-var water := 20
+var water := STARTING_WATER
 var waterProduction := 0
 
 
@@ -19,6 +24,7 @@ var waterProduction := 0
 var cardsPlayed : int
 var maxRounds : int
 var currentTurn : int
+var targetGreen := STARTING_TARGET_GREEN
 
 var levelNumber : int
 
@@ -45,8 +51,8 @@ func _ready() -> void:
 func newTurn():
 	
 	for i in range(handMax - %Hand.get_child_count()):
-		# Shuffle discard
 		if %Deck.get_child_count() == 0:
+			# Shuffle discard
 			var discardedCards = %Discard.get_children()
 			discardedCards.shuffle()
 			for child in discardedCards:
@@ -77,17 +83,17 @@ func playCard(card : Card):
 		textPopup("Not enough energy")
 		return
 	
-	if card.type == Card.TYPE.ANIMAL && abs(card.water) > water:
+	if card.type == Card.TYPE.ANIMAL && card.water > water:
 		textPopup("Not enough water")
 		return
 	
 	match card.type:
 		Card.TYPE.PLANT:
-			waterProduction += card.water
+			waterProduction -= card.water
 			greenProduction += card.green
 			energyProduction += card.energy
 		Card.TYPE.ANIMAL:
-			water += card.water
+			water -= card.water
 			green += card.green
 		Card.TYPE.WEATHER:
 			waterProduction += card.water
@@ -124,6 +130,7 @@ func discardCard(card : Card):
 		newTurn()
 	updateLabels()
 
+
 func drawCard(card : Card):
 	card.reparent(%Hand)
 	card.position = %Hand.STARTINGCARDPOS
@@ -144,18 +151,6 @@ func updateLabels():
 
 
 
-func generateCard():
-	var card : Card = cardScene.instantiate()
-	
-	card.type = Card.TYPE.WEATHER
-	card.water = -3
-	card.energy = 1
-	card.green = 2
-	
-	add_child(card)
-	addCard(card)
-
-
 func textPopup(text : String):
 	var textPopup : TextPopup = textPopupScene.instantiate()
 	textPopup.text = text
@@ -168,6 +163,49 @@ func textPopup(text : String):
 
 
 func _on_end_turn_button_pressed() -> void:
-	$ButtonSound.play()
+	$DrawSound.play()
 	for child in %Hand.get_children():
 		recycleCard(child)
+		
+
+
+func resetDeck():
+	for child in %Hand.get_children():
+		child.reparent(%Discard)
+	
+	for child in %Deck.get_children():
+		child.reparent(%Discard)
+	
+	var cards = %Discard.get_children()
+	cards.shuffle()
+	for card in cards:
+		card.reparent(%Deck)
+
+
+func newLevel():
+	resetDeck()
+	
+	levelNumber += 1
+	
+	energy = STARTING_ENERGY
+	energyProduction = 0
+	green = 0
+	greenProduction = 0
+	water = STARTING_WATER
+	waterProduction = 0
+	
+	cardsPlayed = 0
+	currentTurn = 0
+	
+	targetGreen = STARTING_TARGET_GREEN * levelNumber
+	
+	newTurn()
+
+
+
+func _on_store_card_added(card: Card) -> void:
+	resetDeck()
+	%Deck.get_child(0).queue_free()
+	
+	addCard(card)
+	newLevel()

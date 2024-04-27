@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ds6tba53kruv4"]
+[gd_scene load_steps=15 format=3 uid="uid://ds6tba53kruv4"]
 
 [ext_resource type="Theme" uid="uid://crsd6qx2yqvr7" path="res://new_theme.tres" id="1_i4qe1"]
 [ext_resource type="Script" path="res://game.gd" id="2_xtvks"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://camera.gd" id="11_ndy6m"]
 [ext_resource type="AudioStream" uid="uid://dk4xmeownqld4" path="res://Sounds/vine-boom.ogg" id="12_1vfxt"]
 [ext_resource type="PackedScene" uid="uid://brrgw8fnx18rd" path="res://button_sound.tscn" id="13_p1c3t"]
+[ext_resource type="AudioStream" uid="uid://b07hrsmy2v0y" path="res://Sounds/434472__dersuperanton__taking-card.wav" id="14_cmhyr"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -257,5 +258,9 @@ stream = ExtResource("12_1vfxt")
 max_polyphony = 100
 
 [node name="ButtonSound" parent="." instance=ExtResource("13_p1c3t")]
+
+[node name="DrawSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_cmhyr")
+volume_db = 10.0
 
 [connection signal="pressed" from="EndTurnButton" to="." method="_on_end_turn_button_pressed"]

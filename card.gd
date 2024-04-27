@@ -10,6 +10,8 @@ const WIDTH := 270
 @export var water : int
 @export var energy : int
 
+@export var level := 1
+
 
 @export var type : TYPE
 
@@ -64,4 +66,4 @@ func getEnergyCost() -> int:
 	else:
 		cost -= water
 	
-	return cost
+	return cost / level

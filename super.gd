@@ -2,7 +2,7 @@ extends Control
 
 
 func _ready() -> void:
-	unpause()
+	store()
 
 
 func _process(delta: float) -> void:
@@ -26,10 +26,23 @@ func unpause():
 	$Menu.visible = false
 
 
+func store():
+	$Store.show()
+	get_tree().paused = true
+
+func game():
+	$Store.hide()
+	$Game.show()
+	get_tree().paused = false
+
+
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
 
 
 func _on_store_card_added(card: Card) -> void:
-	$Store.hide()
-	$Game.show()
+	game()
+
+
+func _on_game_won_level() -> void:
+	store()

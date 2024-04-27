@@ -26,19 +26,22 @@ var maxRounds : int
 var currentTurn : int
 var targetGreen := STARTING_TARGET_GREEN
 
-var levelNumber := 0
+var levelNumber := 1
 
 
 var city : CITY
 
 enum CITY {
-	SEATTLE,
-	SANFRANCISCO,
-	AUSTIN,
-	MIAMI,
-	NEWYORK,
-	SAHARA,
+	Seattle,
+	SanFrancisco,
+	Austin,
+	Miami,
+	NewYork,
+	Sahara,
 }
+
+
+signal wonLevel
 
 
 
@@ -48,7 +51,6 @@ func _ready() -> void:
 	for child in startingCards:
 		addCard(child)
 	
-	newTurn()
 
 
 
@@ -196,13 +198,17 @@ func resetDeck():
 
 
 func win():
-	pass
+	%WinLabel.text = "You beat " + CITY.keys()[levelNumber - 1]
+	$WinMessage.show()
+
+
+func _on_win_button_pressed() -> void:
+	levelNumber += 1
+	wonLevel.emit()
 
 
 func newLevel():
 	resetDeck()
-	
-	levelNumber += 1
 	
 	energy = STARTING_ENERGY
 	energyProduction = 0
@@ -216,8 +222,9 @@ func newLevel():
 	
 	targetGreen = STARTING_TARGET_GREEN * levelNumber
 	
-	print(CITY.keys()[levelNumber - 1])
 	$Background.texture = load("res://CityArt/" + str(CITY.keys()[levelNumber - 1]).to_lower() + ".jpg")
+	
+	$WinMessage.hide()
 	
 	newTurn()
 
@@ -225,7 +232,10 @@ func newLevel():
 
 func _on_store_card_added(card: Card) -> void:
 	resetDeck()
-	%Deck.get_child(0).queue_free()
+	%Deck.get_child(0).free()
+	resetDeck()
 	
 	addCard(card)
 	newLevel()
+
+

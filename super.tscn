@@ -22,6 +22,7 @@ process_mode = 1
 layout_mode = 1
 
 [node name="Store" type="Control" parent="."]
+process_mode = 3
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -76,6 +77,8 @@ placeholder_text = "Title"
 max_length = 100
 expand_to_text_length = true
 
+[node name="BoosterPack" type="Sprite2D" parent="Store"]
+
 [node name="Menu" type="Control" parent="."]
 visible = false
 layout_mode = 1
@@ -121,6 +124,7 @@ text = "Tutorial"
 layout_mode = 2
 text = "Quit"
 
+[connection signal="wonLevel" from="Game" to="." method="_on_game_won_level"]
 [connection signal="cardAdded" from="Store" to="." method="_on_store_card_added"]
 [connection signal="cardAdded" from="Store" to="Game" method="_on_store_card_added"]
 [connection signal="text_submitted" from="Store/VBoxContainer/VBoxContainer/LineEdit" to="Store" method="_on_line_edit_text_submitted"]

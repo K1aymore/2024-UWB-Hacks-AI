@@ -68,9 +68,9 @@ func _on_request_completed(result, response_code, headers, body):
 	
 	if plantStart != -1:
 		card.type = Card.TYPE.PLANT
-	elif animalStart != -1:
+	if animalStart != -1:
 		card.type = Card.TYPE.ANIMAL
-	elif weatherStart != -1:
+	if weatherStart != -1:
 		card.type = Card.TYPE.WEATHER
 	
 	print(card.type)
@@ -86,11 +86,16 @@ func _on_request_completed(result, response_code, headers, body):
 	card.water = int(message.substr(message.findn("water:", attributeStart) + 7, 1))
 	card.energy = int(message.substr(message.findn("energy:", attributeStart) + 8, 1))
 	
-	card.green *= %Game.levelNumber
-	card.energy *= %Game.levelNumber
+	
+	var currentLevel : int = %Game.levelNumber
+	
+	card.green *= currentLevel
+	card.energy *= currentLevel
 	
 	if card.type == Card.TYPE.WEATHER:
-		card.water *= %Game.levelNumber
+		card.water *= currentLevel
+	
+	card.level = currentLevel
 	
 	add_child(card)
 	cardAdded.emit(card)

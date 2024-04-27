@@ -2,6 +2,7 @@ extends Control
 
 var cardScene := preload("res://card.tscn")
 
+var myCard : Card
 var cardTitle : String
 
 
@@ -10,6 +11,7 @@ signal cardAdded(card : Card)
 
 
 func _on_line_edit_text_submitted(new_text: String) -> void:
+	%LineEdit.text = ""
 	generateCard(new_text)
 
 
@@ -95,10 +97,17 @@ func _on_request_completed(result, response_code, headers, body):
 	if card.type == Card.TYPE.WEATHER:
 		card.water *= currentLevel
 	
+	if card.type == Card.TYPE.ANIMAL:
+		card.energy *= 5
+	
 	card.level = currentLevel
 	
-	add_child(card)
-	cardAdded.emit(card)
+	myCard = card
+	$BoosterPack.add_child(card)
+
+
+
+	cardAdded.emit(myCard)
 
 
 

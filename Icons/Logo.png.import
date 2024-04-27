@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwattxbpp1dp2"
-path="res://.godot/imported/stage3.png-74d162080944c8bbc350959076e06e3f.ctex"
+uid="uid://dmn4eh284t0eo"
+path="res://.godot/imported/Logo.png-74a0629716e72ae40e6b8ec0af0a36d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tutorial/stage3.png"
-dest_files=["res://.godot/imported/stage3.png-74d162080944c8bbc350959076e06e3f.ctex"]
+source_file="res://Icons/Logo.png"
+dest_files=["res://.godot/imported/Logo.png-74a0629716e72ae40e6b8ec0af0a36d4.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwattxbpp1dp2"
-path="res://.godot/imported/stage3.png-74d162080944c8bbc350959076e06e3f.ctex"
+uid="uid://bjhva45waillk"
+path="res://.godot/imported/Shopkeeper.png-51ee942a98a3f634d2ce5ebd11ae0f86.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tutorial/stage3.png"
-dest_files=["res://.godot/imported/stage3.png-74d162080944c8bbc350959076e06e3f.ctex"]
+source_file="res://Characters/Shopkeeper.png"
+dest_files=["res://.godot/imported/Shopkeeper.png-51ee942a98a3f634d2ce5ebd11ae0f86.ctex"]
 
 [params]
 

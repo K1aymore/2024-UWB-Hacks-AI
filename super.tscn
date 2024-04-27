@@ -1,11 +1,48 @@
-[gd_scene load_steps=8 format=3 uid="uid://bda7wearo4qjn"]
+[gd_scene load_steps=14 format=3 uid="uid://bda7wearo4qjn"]
 
 [ext_resource type="PackedScene" uid="uid://ds6tba53kruv4" path="res://game.tscn" id="1_4rris"]
 [ext_resource type="Script" path="res://super.gd" id="1_4641i"]
 [ext_resource type="Theme" uid="uid://crsd6qx2yqvr7" path="res://new_theme.tres" id="3_sj04a"]
 [ext_resource type="Script" path="res://store.gd" id="3_y0mij"]
 [ext_resource type="Texture2D" uid="uid://ul3iv2p0sw1h" path="res://CardArt/booster_pack.png" id="4_nf526"]
+[ext_resource type="Texture2D" uid="uid://bjhva45waillk" path="res://Characters/Shopkeeper.png" id="4_rbbtf"]
 [ext_resource type="Texture2D" uid="uid://wl7ccv6yakje" path="res://CardArt/booster_open.png" id="5_8mpu2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1f1da"]
+atlas = ExtResource("4_rbbtf")
+region = Rect2(0, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khdhx"]
+atlas = ExtResource("4_rbbtf")
+region = Rect2(1000, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45q4a"]
+atlas = ExtResource("4_rbbtf")
+region = Rect2(2000, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88r1j"]
+atlas = ExtResource("4_rbbtf")
+region = Rect2(3000, 0, 1000, 1000)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s50mw"]
+animations = [{
+"frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_1f1da")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_khdhx")
+}, {
+"duration": 2.5,
+"texture": SubResource("AtlasTexture_45q4a")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_88r1j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h5qfl"]
 animations = [{
@@ -35,6 +72,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+theme = ExtResource("3_sj04a")
 script = ExtResource("1_4641i")
 
 [node name="Game" parent="." instance=ExtResource("1_4rris")]
@@ -54,45 +92,79 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("3_y0mij")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Store"]
+[node name="StoreMenu" type="Control" parent="Store"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Store/StoreMenu"]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -195.0
-offset_right = 195.0
+offset_left = -209.0
+offset_right = 209.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Store/VBoxContainer"]
+[node name="Label" type="Label" parent="Store/StoreMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 126
 text = "STORE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Store/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Store/StoreMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label2" type="Label" parent="Store/VBoxContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="Store/StoreMenu/VBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 27
 text = "Enter the title of your new card:
 (A plant, animal, or weather)"
 
-[node name="LineEdit" type="LineEdit" parent="Store/VBoxContainer/VBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="Store/StoreMenu/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 27
 placeholder_text = "Title"
 max_length = 100
 expand_to_text_length = true
 
+[node name="Guy" type="AnimatedSprite2D" parent="Store"]
+position = Vector2(1567, 591)
+sprite_frames = SubResource("SpriteFrames_s50mw")
+autoplay = "default"
+frame_progress = 0.862369
+
 [node name="BoosterPack" type="AnimatedSprite2D" parent="Store"]
+visible = false
 position = Vector2(418, 449)
 sprite_frames = SubResource("SpriteFrames_h5qfl")
+
+[node name="ContinueButton" type="Button" parent="Store"]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -308.0
+offset_top = -142.0
+offset_right = -229.0
+offset_bottom = -111.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Continue"
 
 [node name="Menu" type="Control" parent="."]
 visible = false
@@ -133,7 +205,7 @@ text = "Quit"
 [connection signal="wonLevel" from="Game" to="." method="_on_game_won_level"]
 [connection signal="cardAdded" from="Store" to="." method="_on_store_card_added"]
 [connection signal="cardAdded" from="Store" to="Game" method="_on_store_card_added"]
-[connection signal="text_submitted" from="Store/VBoxContainer/VBoxContainer/LineEdit" to="Store" method="_on_line_edit_text_submitted"]
+[connection signal="text_submitted" from="Store/StoreMenu/VBoxContainer/VBoxContainer/LineEdit" to="Store" method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="Menu/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/TutorialButton" to="Menu" method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

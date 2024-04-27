@@ -104,6 +104,7 @@ func playCard(card : Card):
 		Card.TYPE.ANIMAL:
 			water -= card.water
 			green += card.green
+			energy += card.energy
 		Card.TYPE.WEATHER:
 			waterProduction += card.water
 			greenProduction += card.green
@@ -200,6 +201,8 @@ func resetDeck():
 func win():
 	%WinLabel.text = "You beat " + CITY.keys()[levelNumber - 1]
 	$WinMessage.show()
+	if levelNumber == 6:
+		%WinButton.hide()
 
 
 func _on_win_button_pressed() -> void:
@@ -223,6 +226,9 @@ func newLevel():
 	targetGreen = STARTING_TARGET_GREEN * levelNumber
 	
 	$Background.texture = load("res://CityArt/" + str(CITY.keys()[levelNumber - 1]).to_lower() + ".jpg")
+	
+	if levelNumber == 6:
+		targetGreen = 99999
 	
 	$WinMessage.hide()
 	

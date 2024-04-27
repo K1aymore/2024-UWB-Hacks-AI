@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ds6tba53kruv4"]
+[gd_scene load_steps=17 format=3 uid="uid://ds6tba53kruv4"]
 
 [ext_resource type="Theme" uid="uid://crsd6qx2yqvr7" path="res://new_theme.tres" id="1_i4qe1"]
 [ext_resource type="Script" path="res://game.gd" id="2_xtvks"]
@@ -15,6 +15,9 @@
 [ext_resource type="AudioStream" uid="uid://dk4xmeownqld4" path="res://Sounds/vine-boom.ogg" id="12_1vfxt"]
 [ext_resource type="PackedScene" uid="uid://brrgw8fnx18rd" path="res://button_sound.tscn" id="13_p1c3t"]
 [ext_resource type="AudioStream" uid="uid://b07hrsmy2v0y" path="res://Sounds/434472__dersuperanton__taking-card.wav" id="14_cmhyr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qe6lt"]
+bg_color = Color(0.686275, 0.870588, 0.968627, 1)
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -39,121 +42,130 @@ texture = ExtResource("3_mj4ot")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="Stats" type="VBoxContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_left = 85.0
-offset_top = 77.0
-offset_right = 574.0
-offset_bottom = 378.0
+offset_left = 83.0
+offset_top = 64.0
+offset_right = 467.0
+offset_bottom = 443.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qe6lt")
 metadata/_edit_group_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Stats"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Stats" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="TurnLabel" type="Label" parent="Stats/HBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/Stats"]
+layout_mode = 2
+columns = 2
+
+[node name="TurnLabel" type="Label" parent="PanelContainer/MarginContainer/Stats/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Turn: 12"
 
-[node name="CardPlayedLabel" type="Label" parent="Stats/HBoxContainer"]
+[node name="CardPlayedLabel" type="Label" parent="PanelContainer/MarginContainer/Stats/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Card Plays: 12"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Stats"]
-layout_mode = 2
-
-[node name="LevelLabel" type="Label" parent="Stats/HBoxContainer2"]
+[node name="LevelLabel" type="Label" parent="PanelContainer/MarginContainer/Stats/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Level: 0"
 
-[node name="TargetLabel" type="Label" parent="Stats/HBoxContainer2"]
+[node name="TargetLabel" type="Label" parent="PanelContainer/MarginContainer/Stats/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Target Green: 0"
 
-[node name="HSeparator" type="HSeparator" parent="Stats"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/Stats"]
 layout_mode = 2
 
-[node name="Grid" type="GridContainer" parent="Stats"]
+[node name="Grid" type="GridContainer" parent="PanelContainer/MarginContainer/Stats"]
 layout_mode = 2
 size_flags_vertical = 4
 columns = 4
 
-[node name="EnergyIcon" type="TextureRect" parent="Stats/Grid"]
+[node name="EnergyIcon" type="TextureRect" parent="PanelContainer/MarginContainer/Stats/Grid"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
 texture = ExtResource("3_i13oa")
 stretch_mode = 2
 
-[node name="EnergyLabel" type="Label" parent="Stats/Grid"]
+[node name="EnergyLabel" type="Label" parent="PanelContainer/MarginContainer/Stats/Grid"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10
 "
 
-[node name="EnergyProdIcon" type="TextureRect" parent="Stats/Grid"]
+[node name="EnergyProdIcon" type="TextureRect" parent="PanelContainer/MarginContainer/Stats/Grid"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
 texture = ExtResource("4_a5sh3")
 
-[node name="EnergyProdLabel" type="Label" parent="Stats/Grid"]
+[node name="EnergyProdLabel" type="Label" parent="PanelContainer/MarginContainer/Stats/Grid"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 
-[node name="GreenIcon" type="TextureRect" parent="Stats/Grid"]
+[node name="GreenIcon" type="TextureRect" parent="PanelContainer/MarginContainer/Stats/Grid"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
 texture = ExtResource("5_1glsq")
 
-[node name="GreenLabel" type="Label" parent="Stats/Grid"]
+[node name="GreenLabel" type="Label" parent="PanelContainer/MarginContainer/Stats/Grid"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 
-[node name="GreenProdIcon" type="TextureRect" parent="Stats/Grid"]
+[node name="GreenProdIcon" type="TextureRect" parent="PanelContainer/MarginContainer/Stats/Grid"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
 texture = ExtResource("6_nvmdt")
 
-[node name="GreenProdLabel" type="Label" parent="Stats/Grid"]
+[node name="GreenProdLabel" type="Label" parent="PanelContainer/MarginContainer/Stats/Grid"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 
-[node name="WaterIcon" type="TextureRect" parent="Stats/Grid"]
+[node name="WaterIcon" type="TextureRect" parent="PanelContainer/MarginContainer/Stats/Grid"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
 texture = ExtResource("7_d730a")
 
-[node name="WaterLabel" type="Label" parent="Stats/Grid"]
+[node name="WaterLabel" type="Label" parent="PanelContainer/MarginContainer/Stats/Grid"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 
-[node name="WaterProdIcon" type="TextureRect" parent="Stats/Grid"]
+[node name="WaterProdIcon" type="TextureRect" parent="PanelContainer/MarginContainer/Stats/Grid"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
 texture = ExtResource("8_q8qn0")
 
-[node name="WaterProdLabel" type="Label" parent="Stats/Grid"]
+[node name="WaterProdLabel" type="Label" parent="PanelContainer/MarginContainer/Stats/Grid"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -291,6 +303,8 @@ max_polyphony = 100
 stream = ExtResource("14_cmhyr")
 volume_db = 10.0
 
+[node name="Boss" type="Sprite2D" parent="."]
+
 [node name="WinMessage" type="MarginContainer" parent="."]
 process_mode = 3
 visible = false
@@ -322,6 +336,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="WinButton" type="Button" parent="WinMessage/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6

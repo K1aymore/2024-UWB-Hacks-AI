@@ -149,92 +149,83 @@ visible = false
 
 [node name="Card" parent="StartingHand" instance=ExtResource("2_330lw")]
 position = Vector2(960, 810)
-title = "Fir Tree"
-flavorText = "Grows tall"
-green = 10
-waterProduction = 10
-energyProduction = 3
+title = "Costal Rains"
+flavorText = "Salty"
+water = 3
+energy = 2
 type = 2
 
 [node name="Card2" parent="StartingHand" instance=ExtResource("2_330lw")]
 position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Grows tall"
-green = 10
-water = 5
-waterProduction = -3
-energyProduction = 3
+green = 3
+water = -3
+energy = 1
 
 [node name="Card3" parent="StartingHand" instance=ExtResource("2_330lw")]
 position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Grows tall"
-green = 10
-water = 5
-waterProduction = -3
-energyProduction = 4
+green = 3
+water = -3
+energy = 1
 
 [node name="Card4" parent="StartingHand" instance=ExtResource("2_330lw")]
 position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Grows tall"
-green = 10
-water = 5
-waterProduction = -3
-energyProduction = 4
+green = 3
+water = -3
+energy = 1
 
 [node name="Card5" parent="StartingHand" instance=ExtResource("2_330lw")]
 position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Grows tall"
-green = 10
-water = 5
-waterProduction = -3
-energyProduction = 4
+green = 3
+water = -3
+energy = 1
 
 [node name="Card6" parent="StartingHand" instance=ExtResource("2_330lw")]
 position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Grows tall"
-green = 10
-water = 5
-waterProduction = -3
-energyProduction = 4
+green = 3
+water = -3
+energy = 1
 
 [node name="Card7" parent="StartingHand" instance=ExtResource("2_330lw")]
 position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Grows tall"
-green = 10
-water = 5
-waterProduction = -3
-energyProduction = 4
+green = 3
+water = -3
+energy = 1
 
 [node name="Card8" parent="StartingHand" instance=ExtResource("2_330lw")]
 position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Grows tall"
-green = 10
-water = 5
-waterProduction = -3
-energyProduction = 4
+green = 3
+water = -3
+energy = 1
 
 [node name="Card9" parent="StartingHand" instance=ExtResource("2_330lw")]
 position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Grows tall"
-green = 10
-water = 5
-waterProduction = -3
-energyProduction = 4
+green = 3
+water = -3
+energy = 1
 
 [node name="Card10" parent="StartingHand" instance=ExtResource("2_330lw")]
 position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Grows tall"
-green = 10
-water = 5
-energyProduction = 3
+green = 3
+water = -3
+energy = 1
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1

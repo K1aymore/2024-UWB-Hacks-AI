@@ -8,8 +8,7 @@ const WIDTH := 270
 
 @export var green : int
 @export var water : int
-@export var waterProduction : int
-@export var energyProduction : int
+@export var energy : int
 
 
 @export var type : TYPE
@@ -31,17 +30,16 @@ func _ready() -> void:
 	%FlavorText.text = flavorText
 	
 	%EnergyCost.text = str(getEnergyCost())
-	%WaterCost.text = str(waterProduction)
+	%WaterCost.text = str(water)
 	%GreenGeneration.text = str(green)
-	%WaterCost.text = str(waterProduction)
 	
 	match type:
 		TYPE.PLANT:
 			$Background.texture = load("res://CardArt/plant_template.png")
-			%Generation.text = str(energyProduction)
+			%Generation.text = str(energy)
 		TYPE.ANIMAL:
 			$Background.texture = load("res://CardArt/animal_template.png")
-			%Generation.text = str(energyProduction)
+			%Generation.text = str(energy)
 		TYPE.WEATHER:
 			$Background.texture = load("res://CardArt/weather_template.png")
 			%Generation.text = str(water)
@@ -51,7 +49,6 @@ func _ready() -> void:
 
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton && event.pressed == true:
-		print(event.button_index)
 		if event.button_index == 1:
 			played.emit(self)
 		if event.button_index == 2:
@@ -60,10 +57,6 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void
 
 
 func getEnergyCost() -> int:
-	var cost := green + water + energyProduction
+	var cost := green + energy + water
 	
-	if type == TYPE.ANIMAL:
-		cost -= waterProduction
-	
-	return 5
-
+	return cost

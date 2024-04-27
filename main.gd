@@ -1,5 +1,7 @@
 extends Control
 
+var cardScene = preload("res://card.tscn")
+
 var handMax := 5
 
 var energy := 10
@@ -63,8 +65,11 @@ func newTurn():
 	if water < 0:
 		var waterDeficit = abs(water)
 		greenProduction -= waterDeficit
-		waterProduction += waterDeficit
+		energyProduction -= waterDeficit / 3
+		waterProduction += waterDeficit / 2
 		water = 0
+		energyProduction = 0 if energyProduction < 0 else energyProduction
+		greenProduction = 0 if greenProduction < 0 else greenProduction
 	
 	currentTurn += 1
 	updateLabels()
@@ -78,14 +83,14 @@ func playCard(card : Card):
 	
 	match card.type:
 		Card.TYPE.PLANT:
-			waterProduction += card.waterProduction
+			waterProduction += card.water
 			greenProduction += card.green
-			energyProduction += card.energyProduction
+			energyProduction += card.energy
 		Card.TYPE.ANIMAL:
-			waterProduction += card.waterProduction
+			water += card.water
 			green += card.green
 		Card.TYPE.WEATHER:
-			waterProduction += card.waterProduction
+			waterProduction += card.water
 			greenProduction += card.green
 	
 	energy -= card.getEnergyCost()
@@ -110,7 +115,7 @@ func addCard(card : Card):
 
 
 func recycleCard(card : Card):
-	energy += card.getEnergyCost()
+	energy += 1
 	discardCard(card)
 	updateLabels()
 
@@ -136,3 +141,15 @@ func updateLabels():
 	%WaterProdLabel.text = str(waterProduction)
 
 
+
+
+func generateCard():
+	var card : Card = cardScene.instantiate()
+	
+	card.type = Card.TYPE.WEATHER
+	card.water = -3
+	card.energy = 1
+	card.green = 2
+	
+	add_child(card)
+	addCard(card)

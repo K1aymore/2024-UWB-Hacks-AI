@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://brrgw8fnx18rd"]
+
+[ext_resource type="AudioStream" uid="uid://ctic2g0fiu21h" path="res://Sounds/269504__michorvath__button-click.wav" id="1_3n07m"]
+
+[node name="ButtonSound" type="AudioStreamPlayer"]
+stream = ExtResource("1_3n07m")
+volume_db = 18.0
+max_polyphony = 10

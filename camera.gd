@@ -1,12 +1,11 @@
 extends Camera2D
 
 # The starting range of possible offsets using random values
-var RANDOM_SHAKE_STRENGTH: float = 20.0
+var RANDOM_SHAKE_STRENGTH: float = 10.0
 # Multiplier for lerping the shake strength to zero
 var SHAKE_DECAY_RATE: float = 5.0
 
 @onready var rand = RandomNumberGenerator.new()
-@onready var apply_button = $ui/apply_shake
 
 var shake_strength: float = 0.0
 

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bda7wearo4qjn"]
+[gd_scene load_steps=5 format=3 uid="uid://bda7wearo4qjn"]
 
 [ext_resource type="PackedScene" uid="uid://ds6tba53kruv4" path="res://game.tscn" id="1_4rris"]
 [ext_resource type="Script" path="res://super.gd" id="1_4641i"]
 [ext_resource type="Theme" uid="uid://crsd6qx2yqvr7" path="res://new_theme.tres" id="3_sj04a"]
+[ext_resource type="Script" path="res://store.gd" id="3_y0mij"]
 
 [node name="Super" type="Control"]
 process_mode = 3
@@ -28,6 +29,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+script = ExtResource("3_y0mij")
 
 [node name="ColorRect" type="ColorRect" parent="Store"]
 layout_mode = 1
@@ -39,6 +41,7 @@ grow_vertical = 2
 color = Color(0.552941, 0.815686, 0.94902, 1)
 
 [node name="Menu" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

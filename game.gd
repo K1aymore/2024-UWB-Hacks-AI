@@ -1,6 +1,7 @@
 extends Control
 
 var cardScene = preload("res://card.tscn")
+var textPopupScene = preload("res://text_popup.tscn")
 
 var handMax := 5
 
@@ -40,15 +41,10 @@ func _ready() -> void:
 	newTurn()
 
 
-func endTurn() -> void:
-	newTurn()
-
 
 func newTurn():
-	for child in %Hand.get_children():
-		recycleCard(child)
 	
-	for i in range(handMax):
+	for i in range(handMax - %Hand.get_child_count()):
 		# Shuffle discard
 		if %Deck.get_child_count() == 0:
 			var discardedCards = %Discard.get_children()
@@ -78,8 +74,11 @@ func newTurn():
 func playCard(card : Card):
 	
 	if card.getEnergyCost() > energy:
-		print("Not enough energy :(")
-		%Camera2D.shake()
+		textPopup("Not enough energy")
+		return
+	
+	if card.type == Card.TYPE.ANIMAL && abs(card.water) > water:
+		textPopup("Not enough water")
 		return
 	
 	match card.type:
@@ -118,10 +117,11 @@ func addCard(card : Card):
 func recycleCard(card : Card):
 	energy += 1
 	discardCard(card)
-	updateLabels()
 
 func discardCard(card : Card):
 	card.reparent(%Discard)
+	if %Hand.get_child_count() == 0:
+		newTurn()
 	updateLabels()
 
 func drawCard(card : Card):
@@ -154,3 +154,20 @@ func generateCard():
 	
 	add_child(card)
 	addCard(card)
+
+
+func textPopup(text : String):
+	var textPopup : TextPopup = textPopupScene.instantiate()
+	textPopup.text = text
+	textPopup.position = get_local_mouse_position()
+	add_child(textPopup)
+	
+	%Camera2D.shake()
+	
+	$VineBoom.play()
+
+
+func _on_end_turn_button_pressed() -> void:
+	$ButtonSound.play()
+	for child in %Hand.get_children():
+		recycleCard(child)

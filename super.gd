@@ -1,10 +1,12 @@
 extends Control
 
 
+func _ready() -> void:
+	unpause()
+
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("escape"):
-		
 		if get_tree().paused:
 			unpause()
 		else:

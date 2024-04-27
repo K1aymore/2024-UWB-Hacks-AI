@@ -4,7 +4,7 @@ class_name Card
 const WIDTH := 270
 
 @export var title : String
-@export var flavorText : String
+@export_multiline var flavorText : String
 
 @export var green : int
 @export var water : int

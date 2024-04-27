@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://pj8ap6vgoisl"]
+[gd_scene load_steps=5 format=3 uid="uid://pj8ap6vgoisl"]
 
 [ext_resource type="Theme" uid="uid://crsd6qx2yqvr7" path="res://new_theme.tres" id="1_bmujq"]
 [ext_resource type="Script" path="res://main_menu.gd" id="2_8upfi"]
+[ext_resource type="PackedScene" uid="uid://brrgw8fnx18rd" path="res://button_sound.tscn" id="3_us781"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6xid8"]
+bg_color = Color(0, 0, 0, 0.858824)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -26,6 +30,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 35
 
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -35,10 +40,72 @@ text = "Play"
 layout_mode = 2
 text = "Tutorial"
 
+[node name="CreditsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 
+[node name="Credits" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 150
+
+[node name="Panel" type="Panel" parent="Credits"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6xid8")
+
+[node name="MarginContainer" type="MarginContainer" parent="Credits/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Credits/Panel/MarginContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "Created by Carl Klay, Elijah Shaw, and Gavin Feng for the UWB Hacks AI Hackathon 2024.
+
+Attributions:
+Made using Godot
+Taking card by dersuperanton -- https://freesound.org/s/434472/ -- License: Attribution 4.0
+Title: [url=\"https://www.textstudio.com/\"]Font generator[/url]"
+
+[node name="CloseCreditsButton" type="Button" parent="Credits/Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -162.0
+offset_top = -107.0
+offset_right = -64.0
+offset_bottom = -50.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Close"
+
+[node name="ButtonSound" parent="." instance=ExtResource("3_us781")]
+
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="meta_clicked" from="Credits/Panel/MarginContainer/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
+[connection signal="pressed" from="Credits/Panel/CloseCreditsButton" to="." method="_on_close_credits_button_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ds6tba53kruv4"]
+[gd_scene load_steps=14 format=3 uid="uid://ds6tba53kruv4"]
 
 [ext_resource type="Theme" uid="uid://crsd6qx2yqvr7" path="res://new_theme.tres" id="1_i4qe1"]
 [ext_resource type="Script" path="res://game.gd" id="2_xtvks"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://hand.gd" id="9_tigp4"]
 [ext_resource type="PackedScene" uid="uid://n8hkxfm0e8go" path="res://card.tscn" id="10_njkof"]
 [ext_resource type="Script" path="res://camera.gd" id="11_ndy6m"]
+[ext_resource type="AudioStream" uid="uid://dk4xmeownqld4" path="res://Sounds/vine-boom.ogg" id="12_1vfxt"]
+[ext_resource type="PackedScene" uid="uid://brrgw8fnx18rd" path="res://button_sound.tscn" id="13_p1c3t"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -23,102 +25,109 @@ mouse_filter = 1
 theme = ExtResource("1_i4qe1")
 script = ExtResource("2_xtvks")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Stats" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 52.0
-offset_right = 653.0
-offset_bottom = 343.0
+offset_left = 85.0
+offset_top = 77.0
+offset_right = 408.0
+offset_bottom = 378.0
 metadata/_edit_group_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Stats"]
 layout_mode = 2
 
-[node name="TurnLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="TurnLabel" type="Label" parent="Stats/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Turn: "
 
-[node name="CardPlayedLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="CardPlayedLabel" type="Label" parent="Stats/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Card Plays:"
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Stats"]
 layout_mode = 2
 
-[node name="Grid" type="GridContainer" parent="VBoxContainer"]
+[node name="Grid" type="GridContainer" parent="Stats"]
 layout_mode = 2
+size_flags_vertical = 4
 columns = 4
 
-[node name="EnergyIcon" type="TextureRect" parent="VBoxContainer/Grid"]
+[node name="EnergyIcon" type="TextureRect" parent="Stats/Grid"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
 texture = ExtResource("3_i13oa")
 stretch_mode = 2
 
-[node name="EnergyLabel" type="Label" parent="VBoxContainer/Grid"]
+[node name="EnergyLabel" type="Label" parent="Stats/Grid"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "10
 "
 
-[node name="EnergyProdIcon" type="TextureRect" parent="VBoxContainer/Grid"]
+[node name="EnergyProdIcon" type="TextureRect" parent="Stats/Grid"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
 texture = ExtResource("4_a5sh3")
 
-[node name="EnergyProdLabel" type="Label" parent="VBoxContainer/Grid"]
+[node name="EnergyProdLabel" type="Label" parent="Stats/Grid"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "0"
 
-[node name="GreenIcon" type="TextureRect" parent="VBoxContainer/Grid"]
+[node name="GreenIcon" type="TextureRect" parent="Stats/Grid"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
 texture = ExtResource("5_1glsq")
 
-[node name="GreenLabel" type="Label" parent="VBoxContainer/Grid"]
+[node name="GreenLabel" type="Label" parent="Stats/Grid"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "0"
 
-[node name="GreenProdIcon" type="TextureRect" parent="VBoxContainer/Grid"]
+[node name="GreenProdIcon" type="TextureRect" parent="Stats/Grid"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
 texture = ExtResource("6_nvmdt")
 
-[node name="GreenProdLabel" type="Label" parent="VBoxContainer/Grid"]
+[node name="GreenProdLabel" type="Label" parent="Stats/Grid"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "0"
 
-[node name="WaterIcon" type="TextureRect" parent="VBoxContainer/Grid"]
+[node name="WaterIcon" type="TextureRect" parent="Stats/Grid"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
 texture = ExtResource("7_d730a")
 
-[node name="WaterLabel" type="Label" parent="VBoxContainer/Grid"]
+[node name="WaterLabel" type="Label" parent="Stats/Grid"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "0"
 
-[node name="WaterProdIcon" type="TextureRect" parent="VBoxContainer/Grid"]
+[node name="WaterProdIcon" type="TextureRect" parent="Stats/Grid"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
 texture = ExtResource("8_q8qn0")
 
-[node name="WaterProdLabel" type="Label" parent="VBoxContainer/Grid"]
+[node name="WaterProdLabel" type="Label" parent="Stats/Grid"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "10"
 
 [node name="Deck" type="Node2D" parent="."]
@@ -141,84 +150,89 @@ visible = false
 [node name="Card" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
 title = "Costal Rains"
-flavorText = "Salty"
-water = 3
-energy = 2
+flavorText = "The coastal rains arrive like a symphony, painting the land in vibrant shades of green, nourishing life with their gentle touch, and energizing the world with their rhythmic dance."
+green = 8
+water = 9
+energy = 6
 type = 2
 
 [node name="Card2" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
 title = "Fir Tree"
-flavorText = "Grows tall"
-green = 3
-water = -3
-energy = 1
+flavorText = "Towering evergreen, a silent guardian of the forest, drinking from hidden springs, basking in the sun's embrace."
+green = 8
+water = -6
+energy = 7
 
 [node name="Card3" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
-title = "Fir Tree"
-flavorText = "Grows tall"
-green = 3
-water = -3
-energy = 1
+title = "Ground Squirrel"
+flavorText = "Quick and nimble, the ground squirrel scampers through the earthy labyrinth, its keen senses tuned to the pulse of the land."
+green = 5
+water = -4
+energy = 7
+type = 1
 
 [node name="Card4" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
-title = "Fir Tree"
-flavorText = "Grows tall"
-green = 3
-water = -3
-energy = 1
+title = "Snowy Breeze"
+flavorText = "A whisper of winter, the snowy breeze blankets the landscape in a delicate embrace, painting the world in glistening white."
+green = 2
+water = 7
+energy = 4
+type = 2
 
 [node name="Card5" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
-title = "Fir Tree"
-flavorText = "Grows tall"
-green = 3
-water = -3
-energy = 1
+title = "Sword Fern"
+flavorText = "Amidst the forest floor, the sword fern stands as a resilient sentinel, its vibrant fronds slicing through the dappled sunlight."
+green = 8
+water = -6
+energy = 7
 
 [node name="Card6" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
-title = "Fir Tree"
-flavorText = "Grows tall"
-green = 3
-water = -3
-energy = 1
+title = "Northern Flicker"
+flavorText = "The Northern Flicker, a flash of golden wings in the dappled sunlight, sings the songs of the forest with its rhythmic drumming."
+green = 5
+water = -6
+energy = 8
 
 [node name="Card7" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
-title = "Fir Tree"
-flavorText = "Grows tall"
-green = 3
-water = -3
-energy = 1
+title = "Summer Monsoon"
+flavorText = "The Summer Monsoon arrives with thunderous applause, quenching the thirst of the land, and painting it in vibrant hues of green."
+green = 8
+water = 9
+energy = 7
+type = 2
 
 [node name="Card8" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
-title = "Fir Tree"
-flavorText = "Grows tall"
-green = 3
-water = -3
-energy = 1
+title = "Orange Tree"
+flavorText = "Under the sun's golden gaze, the Orange Tree bears the fruits of summer, a symbol of vitality and abundance in the orchard."
+green = 7
+water = -8
+energy = 6
 
 [node name="Card9" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
-title = "Fir Tree"
-flavorText = "Grows tall"
-green = 3
-water = -3
-energy = 1
+title = "Carolina Beaver"
+flavorText = "In the Carolina rivers, the industrious beaver shapes its watery domain, weaving a tapestry of life with deft skill and determination."
+green = 5
+water = -8
+energy = 7
+type = 1
 
 [node name="Card10" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
-title = "Fir Tree"
-flavorText = "Grows tall"
-green = 3
-water = -3
-energy = 1
+title = "Creeping Ivy"
+flavorText = "Creeping Ivy, the silent conqueror of walls and fences, whispers tales of resilience as it thrives in the shadows."
+green = 9
+water = -7
+energy = 6
 
-[node name="Button" type="Button" parent="."]
+[node name="EndTurnButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -238,4 +252,10 @@ unique_name_in_owner = true
 position = Vector2(960, 540)
 script = ExtResource("11_ndy6m")
 
-[connection signal="pressed" from="Button" to="." method="endTurn"]
+[node name="VineBoom" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_1vfxt")
+max_polyphony = 100
+
+[node name="ButtonSound" parent="." instance=ExtResource("13_p1c3t")]
+
+[connection signal="pressed" from="EndTurnButton" to="." method="_on_end_turn_button_pressed"]

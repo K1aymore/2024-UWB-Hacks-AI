@@ -19,7 +19,7 @@ func _on_play_button_pressed() -> void:
 
 func _on_tutorial_button_pressed() -> void:
 	$ButtonSound.play()
-	pass # Replace with function body.
+	$Tutorial.show()
 
 
 func _on_credits_button_pressed() -> void:
@@ -40,3 +40,7 @@ func _on_close_credits_button_pressed() -> void:
 	$ButtonSound.play()
 	$Credits.hide()
 
+
+
+func _on_close_tutorial_button_pressed() -> void:
+	$Tutorial.hide()

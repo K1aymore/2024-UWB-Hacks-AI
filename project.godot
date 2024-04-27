@@ -34,4 +34,4 @@ escape={
 [rendering]
 
 renderer/rendering_method="mobile"
-environment/defaults/default_clear_color=Color(0.552941, 0.815686, 0.94902, 1)
+environment/defaults/default_clear_color=Color(0.685397, 0.870889, 0.968119, 1)

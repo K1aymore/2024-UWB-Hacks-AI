@@ -1,9 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://bda7wearo4qjn"]
+[gd_scene load_steps=8 format=3 uid="uid://bda7wearo4qjn"]
 
 [ext_resource type="PackedScene" uid="uid://ds6tba53kruv4" path="res://game.tscn" id="1_4rris"]
 [ext_resource type="Script" path="res://super.gd" id="1_4641i"]
 [ext_resource type="Theme" uid="uid://crsd6qx2yqvr7" path="res://new_theme.tres" id="3_sj04a"]
 [ext_resource type="Script" path="res://store.gd" id="3_y0mij"]
+[ext_resource type="Texture2D" uid="uid://ul3iv2p0sw1h" path="res://CardArt/booster_pack.png" id="4_nf526"]
+[ext_resource type="Texture2D" uid="uid://wl7ccv6yakje" path="res://CardArt/booster_open.png" id="5_8mpu2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h5qfl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_nf526")
+}],
+"loop": false,
+"name": &"default",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_8mpu2")
+}],
+"loop": false,
+"name": &"open",
+"speed": 1.0
+}]
 
 [node name="Super" type="Control"]
 process_mode = 3
@@ -19,6 +40,7 @@ script = ExtResource("1_4641i")
 [node name="Game" parent="." instance=ExtResource("1_4rris")]
 unique_name_in_owner = true
 process_mode = 1
+visible = false
 layout_mode = 1
 
 [node name="Store" type="Control" parent="."]
@@ -31,15 +53,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("3_y0mij")
-
-[node name="ColorRect" type="ColorRect" parent="Store"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.552941, 0.815686, 0.94902, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Store"]
 layout_mode = 1
@@ -77,7 +90,9 @@ placeholder_text = "Title"
 max_length = 100
 expand_to_text_length = true
 
-[node name="BoosterPack" type="Sprite2D" parent="Store"]
+[node name="BoosterPack" type="AnimatedSprite2D" parent="Store"]
+position = Vector2(418, 449)
+sprite_frames = SubResource("SpriteFrames_h5qfl")
 
 [node name="Menu" type="Control" parent="."]
 visible = false
@@ -88,15 +103,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_sj04a")
-
-[node name="ColorRect" type="ColorRect" parent="Menu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.552941, 0.815686, 0.94902, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
 layout_mode = 1

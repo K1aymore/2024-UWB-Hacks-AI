@@ -1,6 +1,9 @@
 extends Control
 
 
+var inStore := true
+
+
 func _ready() -> void:
 	store()
 
@@ -19,18 +22,26 @@ func _on_play_button_pressed() -> void:
 
 func pause():
 	get_tree().paused = true
-	$Menu.visible = true
+	$Menu.show()
+	$Store.hide()
+	$Game.hide()
 
 func unpause():
 	get_tree().paused = false
-	$Menu.visible = false
+	$Menu.hide()
+	if inStore:
+		store()
 
 
 func store():
+	inStore = true
 	$Store.show()
+	$Game.hide()
 	get_tree().paused = true
 
 func game():
+	inStore = false
+	$Menu.hide()
 	$Store.hide()
 	$Game.show()
 	get_tree().paused = false

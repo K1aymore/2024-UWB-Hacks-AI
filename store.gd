@@ -58,27 +58,39 @@ func _on_request_completed(result, response_code, headers, body):
 	
 	card.title = cardTitle
 	
-	var typeStart := message.findn("type:")
+	var plantStart = message.findn("plant")
+	print("Plant start: ", plantStart)
+	var animalStart = message.findn("animal")
+	print("Animal start: ", animalStart)
+	var weatherStart = message.findn("weather")
+	print("Weather start: ", weatherStart)
 	
-	if message.findn("plant", typeStart) - typeStart < 10:
+	
+	if plantStart != -1:
 		card.type = Card.TYPE.PLANT
-	if message.findn("animal", typeStart) - typeStart < 10:
+	elif animalStart != -1:
 		card.type = Card.TYPE.ANIMAL
-	if message.findn("weather", typeStart) - typeStart < 10:
+	elif weatherStart != -1:
 		card.type = Card.TYPE.WEATHER
 	
 	print(card.type)
 	
 	var attributeStart = message.findn("attributes:")
-	var flavorTextStart := message.findn("flavor text: ") + 12
+	var flavorTextStart := message.findn("flavor text: ") + 13
 	card.flavorText = message.substr(flavorTextStart, attributeStart-flavorTextStart)
 	
 	print("Green number:")
 	print(int(message.substr(message.findn("green:", attributeStart) + 6, 3)))
 	
-	card.green = int(message.substr(message.findn("green:", attributeStart) + 6, 3))
-	card.water = int(message.substr(message.findn("water:", attributeStart) + 6, 3))
-	card.water = int(message.substr(message.findn("energy:", attributeStart) + 7, 3))
+	card.green = int(message.substr(message.findn("green:", attributeStart) + 7, 1))
+	card.water = int(message.substr(message.findn("water:", attributeStart) + 7, 1))
+	card.energy = int(message.substr(message.findn("energy:", attributeStart) + 8, 1))
+	
+	card.green *= %Game.levelNumber
+	card.energy *= %Game.levelNumber
+	
+	if card.type == Card.TYPE.WEATHER:
+		card.water *= %Game.levelNumber
 	
 	add_child(card)
 	cardAdded.emit(card)

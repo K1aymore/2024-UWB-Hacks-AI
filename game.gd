@@ -26,14 +26,18 @@ var maxRounds : int
 var currentTurn : int
 var targetGreen := STARTING_TARGET_GREEN
 
-var levelNumber : int
+var levelNumber := 0
 
 
 var city : CITY
 
 enum CITY {
-	SAHARA_DESERT,
-	BOULDER_COLORADO,
+	SEATTLE,
+	SANFRANCISCO,
+	AUSTIN,
+	MIAMI,
+	NEWYORK,
+	SAHARA,
 }
 
 
@@ -50,7 +54,7 @@ func _ready() -> void:
 
 func newTurn():
 	
-	for i in range(handMax - %Hand.get_child_count()):
+	for i in range(handMax):
 		if %Deck.get_child_count() == 0:
 			# Shuffle discard
 			var discardedCards = %Discard.get_children()
@@ -72,6 +76,9 @@ func newTurn():
 		water = 0
 		energyProduction = 0 if energyProduction < 0 else energyProduction
 		greenProduction = 0 if greenProduction < 0 else greenProduction
+	
+	if green > targetGreen:
+		win()
 	
 	currentTurn += 1
 	updateLabels()
@@ -140,6 +147,8 @@ func drawCard(card : Card):
 func updateLabels():
 	%TurnLabel.text = "Turn: " + str(currentTurn)
 	%CardPlayedLabel.text = "Cards Played: "  + str(cardsPlayed)
+	%LevelLabel.text = "Level: " + str(levelNumber)
+	%TargetLabel.text = "Target Green: " + str(targetGreen)
 	
 	%EnergyLabel.text = str(energy)
 	%EnergyProdLabel.text = str(energyProduction)
@@ -147,6 +156,9 @@ func updateLabels():
 	%GreenProdLabel.text = str(greenProduction)
 	%WaterLabel.text = str(water)
 	%WaterProdLabel.text = str(waterProduction)
+	
+	
+	$Background.modulate.a = green / float(targetGreen)
 
 
 
@@ -182,6 +194,11 @@ func resetDeck():
 		card.reparent(%Deck)
 
 
+
+func win():
+	pass
+
+
 func newLevel():
 	resetDeck()
 	
@@ -198,6 +215,9 @@ func newLevel():
 	currentTurn = 0
 	
 	targetGreen = STARTING_TARGET_GREEN * levelNumber
+	
+	print(CITY.keys()[levelNumber - 1])
+	$Background.texture = load("res://CityArt/" + str(CITY.keys()[levelNumber - 1]).to_lower() + ".jpg")
 	
 	newTurn()
 

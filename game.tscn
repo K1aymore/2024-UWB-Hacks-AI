@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://ds6tba53kruv4"]
+[gd_scene load_steps=16 format=3 uid="uid://ds6tba53kruv4"]
 
 [ext_resource type="Theme" uid="uid://crsd6qx2yqvr7" path="res://new_theme.tres" id="1_i4qe1"]
 [ext_resource type="Script" path="res://game.gd" id="2_xtvks"]
 [ext_resource type="Texture2D" uid="uid://rw2rdwatpvju" path="res://Icons/energy_total_half.png" id="3_i13oa"]
+[ext_resource type="Texture2D" uid="uid://drkglw8a4scbq" path="res://CityArt/seattle.jpg" id="3_mj4ot"]
 [ext_resource type="Texture2D" uid="uid://raqau1585wb6" path="res://Icons/energy_production_half.png" id="4_a5sh3"]
 [ext_resource type="Texture2D" uid="uid://v13hboihu10e" path="res://Icons/green_total_half.png" id="5_1glsq"]
 [ext_resource type="Texture2D" uid="uid://b00yifud4pr8i" path="res://Icons/green_production_half.png" id="6_nvmdt"]
@@ -26,11 +27,23 @@ mouse_filter = 1
 theme = ExtResource("1_i4qe1")
 script = ExtResource("2_xtvks")
 
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.913725)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_mj4ot")
+expand_mode = 5
+stretch_mode = 4
+
 [node name="Stats" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 85.0
 offset_top = 77.0
-offset_right = 408.0
+offset_right = 574.0
 offset_bottom = 378.0
 metadata/_edit_group_ = true
 
@@ -41,13 +54,28 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Turn: "
+text = "Turn: 12"
 
 [node name="CardPlayedLabel" type="Label" parent="Stats/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Card Plays:"
+text = "Card Plays: 12"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Stats"]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="Stats/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Level: 0"
+
+[node name="TargetLabel" type="Label" parent="Stats/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Target Green: 0"
 
 [node name="HSeparator" type="HSeparator" parent="Stats"]
 layout_mode = 2
@@ -162,7 +190,7 @@ position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Towering evergreen, a silent guardian of the forest, drinking from hidden springs, basking in the sun's embrace."
 green = 8
-water = -6
+water = 6
 energy = 7
 
 [node name="Card3" parent="StartingHand" instance=ExtResource("10_njkof")]
@@ -170,7 +198,7 @@ position = Vector2(960, 810)
 title = "Ground Squirrel"
 flavorText = "Quick and nimble, the ground squirrel scampers through the earthy labyrinth, its keen senses tuned to the pulse of the land."
 green = 5
-water = -4
+water = 4
 energy = 7
 type = 1
 
@@ -188,7 +216,7 @@ position = Vector2(960, 810)
 title = "Sword Fern"
 flavorText = "Amidst the forest floor, the sword fern stands as a resilient sentinel, its vibrant fronds slicing through the dappled sunlight."
 green = 8
-water = -6
+water = 6
 energy = 7
 
 [node name="Card6" parent="StartingHand" instance=ExtResource("10_njkof")]
@@ -196,7 +224,7 @@ position = Vector2(960, 810)
 title = "Northern Flicker"
 flavorText = "The Northern Flicker, a flash of golden wings in the dappled sunlight, sings the songs of the forest with its rhythmic drumming."
 green = 5
-water = -6
+water = 6
 energy = 8
 
 [node name="Card7" parent="StartingHand" instance=ExtResource("10_njkof")]
@@ -213,7 +241,7 @@ position = Vector2(960, 810)
 title = "Orange Tree"
 flavorText = "Under the sun's golden gaze, the Orange Tree bears the fruits of summer, a symbol of vitality and abundance in the orchard."
 green = 7
-water = -8
+water = 8
 energy = 6
 
 [node name="Card9" parent="StartingHand" instance=ExtResource("10_njkof")]
@@ -221,7 +249,7 @@ position = Vector2(960, 810)
 title = "Carolina Beaver"
 flavorText = "In the Carolina rivers, the industrious beaver shapes its watery domain, weaving a tapestry of life with deft skill and determination."
 green = 5
-water = -8
+water = 8
 energy = 7
 type = 1
 
@@ -230,7 +258,7 @@ position = Vector2(960, 810)
 title = "Creeping Ivy"
 flavorText = "Creeping Ivy, the silent conqueror of walls and fences, whispers tales of resilience as it thrives in the shadows."
 green = 9
-water = -7
+water = 7
 energy = 6
 
 [node name="EndTurnButton" type="Button" parent="."]

@@ -79,6 +79,7 @@ func playCard(card : Card):
 	
 	if card.getEnergyCost() > energy:
 		print("Not enough energy :(")
+		%Camera2D.shake()
 		return
 	
 	match card.type:

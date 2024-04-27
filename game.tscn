@@ -1,17 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://ds6tba53kruv4"]
+[gd_scene load_steps=12 format=3 uid="uid://ds6tba53kruv4"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_ipjbi"]
-[ext_resource type="Theme" uid="uid://crsd6qx2yqvr7" path="res://new_theme.tres" id="1_uu4lw"]
-[ext_resource type="PackedScene" uid="uid://n8hkxfm0e8go" path="res://card.tscn" id="2_330lw"]
-[ext_resource type="Script" path="res://hand.gd" id="2_ug72y"]
-[ext_resource type="Texture2D" uid="uid://rw2rdwatpvju" path="res://Icons/energy_total_half.png" id="3_t3qq8"]
-[ext_resource type="Texture2D" uid="uid://raqau1585wb6" path="res://Icons/energy_production_half.png" id="4_eh7mu"]
-[ext_resource type="Texture2D" uid="uid://v13hboihu10e" path="res://Icons/green_total_half.png" id="5_dg3wm"]
-[ext_resource type="Texture2D" uid="uid://b00yifud4pr8i" path="res://Icons/green_production_half.png" id="6_vdh0e"]
-[ext_resource type="Texture2D" uid="uid://tr0g4xp6mw04" path="res://Icons/water_total_half.png" id="7_ppdaf"]
-[ext_resource type="Texture2D" uid="uid://b8hpayh720pvi" path="res://Icons/water_production_half.png" id="8_xutlf"]
+[ext_resource type="Theme" uid="uid://crsd6qx2yqvr7" path="res://new_theme.tres" id="1_i4qe1"]
+[ext_resource type="Script" path="res://game.gd" id="2_xtvks"]
+[ext_resource type="Texture2D" uid="uid://rw2rdwatpvju" path="res://Icons/energy_total_half.png" id="3_i13oa"]
+[ext_resource type="Texture2D" uid="uid://raqau1585wb6" path="res://Icons/energy_production_half.png" id="4_a5sh3"]
+[ext_resource type="Texture2D" uid="uid://v13hboihu10e" path="res://Icons/green_total_half.png" id="5_1glsq"]
+[ext_resource type="Texture2D" uid="uid://b00yifud4pr8i" path="res://Icons/green_production_half.png" id="6_nvmdt"]
+[ext_resource type="Texture2D" uid="uid://tr0g4xp6mw04" path="res://Icons/water_total_half.png" id="7_d730a"]
+[ext_resource type="Texture2D" uid="uid://b8hpayh720pvi" path="res://Icons/water_production_half.png" id="8_q8qn0"]
+[ext_resource type="Script" path="res://hand.gd" id="9_tigp4"]
+[ext_resource type="PackedScene" uid="uid://n8hkxfm0e8go" path="res://card.tscn" id="10_njkof"]
+[ext_resource type="Script" path="res://camera.gd" id="11_ndy6m"]
 
-[node name="Main" type="Control"]
+[node name="Game" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,18 +20,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-theme = ExtResource("1_uu4lw")
-script = ExtResource("1_ipjbi")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-color = Color(0.552789, 0.816949, 0.947545, 1)
+theme = ExtResource("1_i4qe1")
+script = ExtResource("2_xtvks")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -66,7 +57,7 @@ columns = 4
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
-texture = ExtResource("3_t3qq8")
+texture = ExtResource("3_i13oa")
 stretch_mode = 2
 
 [node name="EnergyLabel" type="Label" parent="VBoxContainer/Grid"]
@@ -79,7 +70,7 @@ text = "10
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
-texture = ExtResource("4_eh7mu")
+texture = ExtResource("4_a5sh3")
 
 [node name="EnergyProdLabel" type="Label" parent="VBoxContainer/Grid"]
 unique_name_in_owner = true
@@ -90,7 +81,7 @@ text = "0"
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
-texture = ExtResource("5_dg3wm")
+texture = ExtResource("5_1glsq")
 
 [node name="GreenLabel" type="Label" parent="VBoxContainer/Grid"]
 unique_name_in_owner = true
@@ -101,7 +92,7 @@ text = "0"
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
-texture = ExtResource("6_vdh0e")
+texture = ExtResource("6_nvmdt")
 
 [node name="GreenProdLabel" type="Label" parent="VBoxContainer/Grid"]
 unique_name_in_owner = true
@@ -112,7 +103,7 @@ text = "0"
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
-texture = ExtResource("7_ppdaf")
+texture = ExtResource("7_d730a")
 
 [node name="WaterLabel" type="Label" parent="VBoxContainer/Grid"]
 unique_name_in_owner = true
@@ -123,7 +114,7 @@ text = "0"
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
-texture = ExtResource("8_xutlf")
+texture = ExtResource("8_q8qn0")
 
 [node name="WaterProdLabel" type="Label" parent="VBoxContainer/Grid"]
 unique_name_in_owner = true
@@ -137,7 +128,7 @@ visible = false
 [node name="Hand" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(960, 810)
-script = ExtResource("2_ug72y")
+script = ExtResource("9_tigp4")
 
 [node name="Discard" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -147,7 +138,7 @@ visible = false
 unique_name_in_owner = true
 visible = false
 
-[node name="Card" parent="StartingHand" instance=ExtResource("2_330lw")]
+[node name="Card" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
 title = "Costal Rains"
 flavorText = "Salty"
@@ -155,7 +146,7 @@ water = 3
 energy = 2
 type = 2
 
-[node name="Card2" parent="StartingHand" instance=ExtResource("2_330lw")]
+[node name="Card2" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Grows tall"
@@ -163,7 +154,7 @@ green = 3
 water = -3
 energy = 1
 
-[node name="Card3" parent="StartingHand" instance=ExtResource("2_330lw")]
+[node name="Card3" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Grows tall"
@@ -171,7 +162,7 @@ green = 3
 water = -3
 energy = 1
 
-[node name="Card4" parent="StartingHand" instance=ExtResource("2_330lw")]
+[node name="Card4" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Grows tall"
@@ -179,7 +170,7 @@ green = 3
 water = -3
 energy = 1
 
-[node name="Card5" parent="StartingHand" instance=ExtResource("2_330lw")]
+[node name="Card5" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Grows tall"
@@ -187,7 +178,7 @@ green = 3
 water = -3
 energy = 1
 
-[node name="Card6" parent="StartingHand" instance=ExtResource("2_330lw")]
+[node name="Card6" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Grows tall"
@@ -195,7 +186,7 @@ green = 3
 water = -3
 energy = 1
 
-[node name="Card7" parent="StartingHand" instance=ExtResource("2_330lw")]
+[node name="Card7" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Grows tall"
@@ -203,7 +194,7 @@ green = 3
 water = -3
 energy = 1
 
-[node name="Card8" parent="StartingHand" instance=ExtResource("2_330lw")]
+[node name="Card8" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Grows tall"
@@ -211,7 +202,7 @@ green = 3
 water = -3
 energy = 1
 
-[node name="Card9" parent="StartingHand" instance=ExtResource("2_330lw")]
+[node name="Card9" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Grows tall"
@@ -219,7 +210,7 @@ green = 3
 water = -3
 energy = 1
 
-[node name="Card10" parent="StartingHand" instance=ExtResource("2_330lw")]
+[node name="Card10" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
 title = "Fir Tree"
 flavorText = "Grows tall"
@@ -241,5 +232,10 @@ offset_bottom = 39.0
 grow_horizontal = 0
 grow_vertical = 2
 text = "End Turn"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(960, 540)
+script = ExtResource("11_ndy6m")
 
 [connection signal="pressed" from="Button" to="." method="endTurn"]

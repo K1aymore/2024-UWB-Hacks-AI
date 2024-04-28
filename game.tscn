@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ds6tba53kruv4"]
+[gd_scene load_steps=20 format=3 uid="uid://ds6tba53kruv4"]
 
 [ext_resource type="Theme" uid="uid://crsd6qx2yqvr7" path="res://new_theme.tres" id="1_i4qe1"]
 [ext_resource type="Script" path="res://game.gd" id="2_xtvks"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://b07hrsmy2v0y" path="res://Sounds/434472__dersuperanton__taking-card.wav" id="14_cmhyr"]
 [ext_resource type="Texture2D" uid="uid://4dg6lh4ulmy0" path="res://Characters/seattle.png" id="16_ktuu6"]
 [ext_resource type="AudioStream" uid="uid://1b4yhw5851wn" path="res://Sounds/Victory.wav" id="16_uv1st"]
+[ext_resource type="Texture2D" uid="uid://tcha4vnx20hp" path="res://Icons/TextBubbleThick.png" id="18_pwxx0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qe6lt"]
 bg_color = Color(0.686275, 0.870588, 0.968627, 1)
@@ -246,14 +247,6 @@ green = 8
 water = 6
 energy = 7
 
-[node name="Card6" parent="StartingHand" instance=ExtResource("10_njkof")]
-position = Vector2(960, 810)
-title = "Northern Flicker"
-flavorText = "The Northern Flicker, a flash of golden wings in the dappled sunlight, sings the songs of the forest with its rhythmic drumming."
-green = 5
-water = 6
-energy = 8
-
 [node name="Card7" parent="StartingHand" instance=ExtResource("10_njkof")]
 position = Vector2(960, 810)
 title = "Summer Monsoon"
@@ -287,6 +280,14 @@ flavorText = "Creeping Ivy, the silent conqueror of walls and fences, whispers t
 green = 9
 water = 7
 energy = 6
+
+[node name="Card6" parent="StartingHand" instance=ExtResource("10_njkof")]
+position = Vector2(960, 810)
+title = "Northern Flicker"
+flavorText = "The Northern Flicker, a flash of golden wings in the dappled sunlight, sings the songs of the forest with its rhythmic drumming."
+green = 5
+water = 6
+energy = 8
 
 [node name="EndTurnButton" type="Button" parent="."]
 layout_mode = 1
@@ -326,6 +327,36 @@ position = Vector2(1408, 278)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("16_ktuu6")
 
+[node name="TextBubble" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1077, 178)
+texture = ExtResource("18_pwxx0")
+
+[node name="BossLabel" type="Label" parent="TextBubble"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -489.0
+offset_top = -422.0
+offset_right = -156.0
+offset_bottom = -243.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme = ExtResource("1_i4qe1")
+theme_override_font_sizes/font_size = 28
+text = "I'm not just leaving footprints; I'm leaving toxic trails of destruction!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="TextTimer" type="Timer" parent="."]
+wait_time = 45.0
+autostart = true
+
 [node name="WinMessage" type="MarginContainer" parent="."]
 process_mode = 3
 visible = false
@@ -364,4 +395,5 @@ size_flags_vertical = 6
 text = "Continue to Shop"
 
 [connection signal="pressed" from="EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="timeout" from="TextTimer" to="." method="_on_text_timer_timeout"]
 [connection signal="pressed" from="WinMessage/PanelContainer/VBoxContainer/WinButton" to="." method="_on_win_button_pressed"]

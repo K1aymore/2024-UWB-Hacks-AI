@@ -6,12 +6,21 @@ var myCard : Card
 var cardTitle : String
 
 var cardSubmitted := false
+var slidingAnim := false
 
 signal cardAdded(card : Card)
 
 
 
+func _process(delta: float) -> void:
+	if slidingAnim:
+		%BoosterPack.position.y += delta * 800
+
+
+
 func _on_line_edit_text_submitted(new_text: String) -> void:
+	$StoreMenu.hide()
+	%Booster.show()
 	if !cardSubmitted:
 		cardSubmitted = true
 		generateCard(new_text)
@@ -105,12 +114,27 @@ func _on_request_completed(result, response_code, headers, body):
 	card.level = currentLevel
 	
 	myCard = card
-	$BoosterPack.add_child(card)
+	%Booster.add_child(card)
+	card.position = %BoosterPack.position
+	slidingAnim = true
+	$BoosterOpenSound.play()
 	
+
+
+
+func continueToGame():
 	%LineEdit.text = ""
 	cardSubmitted = false
+	slidingAnim = false
+	%BoosterPack.position = Vector2(500, 500)
+	$StoreMenu.show()
+	%Booster.hide()
 	
 	cardAdded.emit(myCard)
+	myCard = null
 
 
 
+
+func _on_continue_button_pressed() -> void:
+	continueToGame()

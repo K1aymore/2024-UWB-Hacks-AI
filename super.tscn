@@ -1,12 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://bda7wearo4qjn"]
+[gd_scene load_steps=22 format=3 uid="uid://bda7wearo4qjn"]
 
 [ext_resource type="PackedScene" uid="uid://ds6tba53kruv4" path="res://game.tscn" id="1_4rris"]
 [ext_resource type="Script" path="res://super.gd" id="1_4641i"]
 [ext_resource type="Theme" uid="uid://crsd6qx2yqvr7" path="res://new_theme.tres" id="3_sj04a"]
 [ext_resource type="Script" path="res://store.gd" id="3_y0mij"]
-[ext_resource type="Texture2D" uid="uid://ul3iv2p0sw1h" path="res://CardArt/booster_pack.png" id="4_nf526"]
 [ext_resource type="Texture2D" uid="uid://bjhva45waillk" path="res://Characters/Shopkeeper.png" id="4_rbbtf"]
-[ext_resource type="Texture2D" uid="uid://wl7ccv6yakje" path="res://CardArt/booster_open.png" id="5_8mpu2"]
+[ext_resource type="Texture2D" uid="uid://b8ec0xkodqwsh" path="res://CardArt/Booster_Pack_Open.png" id="6_hrm71"]
+[ext_resource type="AudioStream" uid="uid://bpm70daoh8ex4" path="res://Sounds/card-pickup.wav" id="7_rdoj1"]
 [ext_resource type="Texture2D" uid="uid://bilis8da4ekmi" path="res://Tutorial/stage0.png" id="8_1orv6"]
 [ext_resource type="Texture2D" uid="uid://c1iyo0ed5ac0k" path="res://Tutorial/stage1.png" id="9_drsqk"]
 [ext_resource type="Texture2D" uid="uid://dvepm56wu0wi" path="res://Tutorial/stage2.png" id="10_ij62r"]
@@ -49,23 +49,33 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mef6p"]
+atlas = ExtResource("6_hrm71")
+region = Rect2(0, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2ppl"]
+atlas = ExtResource("6_hrm71")
+region = Rect2(1000, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ay65q"]
+atlas = ExtResource("6_hrm71")
+region = Rect2(2000, 0, 1000, 1000)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_h5qfl"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_nf526")
+"texture": SubResource("AtlasTexture_mef6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2ppl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ay65q")
 }],
 "loop": false,
 "name": &"default",
-"speed": 1.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_8mpu2")
-}],
-"loop": false,
-"name": &"open",
-"speed": 1.0
+"speed": 5.0
 }]
 
 [node name="Super" type="Control"]
@@ -150,26 +160,41 @@ sprite_frames = SubResource("SpriteFrames_s50mw")
 autoplay = "default"
 frame_progress = 0.862369
 
-[node name="BoosterPack" type="AnimatedSprite2D" parent="Store"]
-visible = false
-position = Vector2(418, 449)
-sprite_frames = SubResource("SpriteFrames_h5qfl")
-
-[node name="ContinueButton" type="Button" parent="Store"]
+[node name="Booster" type="Control" parent="Store"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -308.0
-offset_top = -142.0
-offset_right = -229.0
-offset_bottom = -111.0
-grow_horizontal = 0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BoosterPack" type="AnimatedSprite2D" parent="Store/Booster"]
+unique_name_in_owner = true
+z_index = 1
+position = Vector2(500, 500)
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_h5qfl")
+offset = Vector2(50, -50)
+
+[node name="ContinueButton" type="Button" parent="Store/Booster"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -146.0
+offset_right = 81.0
+offset_bottom = -89.0
+grow_horizontal = 2
 grow_vertical = 0
 text = "Continue"
+
+[node name="BoosterOpenSound" type="AudioStreamPlayer" parent="Store"]
+stream = ExtResource("7_rdoj1")
 
 [node name="Menu" type="Control" parent="."]
 visible = false
@@ -284,6 +309,7 @@ text = "Close"
 [connection signal="cardAdded" from="Store" to="." method="_on_store_card_added"]
 [connection signal="cardAdded" from="Store" to="Game" method="_on_store_card_added"]
 [connection signal="text_submitted" from="Store/StoreMenu/VBoxContainer/VBoxContainer/LineEdit" to="Store" method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="Store/Booster/ContinueButton" to="Store" method="_on_continue_button_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/ResumeButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

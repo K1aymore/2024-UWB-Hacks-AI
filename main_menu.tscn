@@ -103,7 +103,9 @@ text = "Created by Carl Klay, Elijah Shaw, and Gavin Feng for the UWB Hacks AI H
 Attributions:
 Made using Godot
 Taking card by dersuperanton -- https://freesound.org/s/434472/ -- License: Attribution 4.0
-Title: [url=\"https://www.textstudio.com/\"]Font generator[/url]"
+Power Up 8 Bit.wav by Mrthenoronha -- https://freesound.org/s/511385/ -- License: Attribution NonCommercial 4.0
+Title: [url=\"https://www.textstudio.com/\"]Font generator[/url]
+"
 
 [node name="CloseCreditsButton" type="Button" parent="Credits/Panel"]
 layout_mode = 1

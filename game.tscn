@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ds6tba53kruv4"]
+[gd_scene load_steps=19 format=3 uid="uid://ds6tba53kruv4"]
 
 [ext_resource type="Theme" uid="uid://crsd6qx2yqvr7" path="res://new_theme.tres" id="1_i4qe1"]
 [ext_resource type="Script" path="res://game.gd" id="2_xtvks"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://brrgw8fnx18rd" path="res://button_sound.tscn" id="13_p1c3t"]
 [ext_resource type="AudioStream" uid="uid://b07hrsmy2v0y" path="res://Sounds/434472__dersuperanton__taking-card.wav" id="14_cmhyr"]
 [ext_resource type="Texture2D" uid="uid://4dg6lh4ulmy0" path="res://Characters/seattle.png" id="16_ktuu6"]
+[ext_resource type="AudioStream" uid="uid://1b4yhw5851wn" path="res://Sounds/Victory.wav" id="16_uv1st"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qe6lt"]
 bg_color = Color(0.686275, 0.870588, 0.968627, 1)
@@ -36,12 +37,16 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -350.0
+offset_top = -146.0
+offset_right = 307.0
+offset_bottom = 174.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.481789, 0.481789, 0.481789, 1)
+color = Color(0.48, 0.3552, 0.3552, 1)
 
 [node name="Background" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.913725)
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -312,6 +317,9 @@ max_polyphony = 100
 [node name="DrawSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_cmhyr")
 volume_db = 10.0
+
+[node name="VictorySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_uv1st")
 
 [node name="Boss" type="Sprite2D" parent="."]
 position = Vector2(1408, 278)

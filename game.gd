@@ -204,6 +204,7 @@ func resetDeck():
 func win():
 	%WinLabel.text = "You beat " + CITY.keys()[levelNumber - 1]
 	$WinMessage.show()
+	$VictorySound.play()
 	if levelNumber == 6:
 		%WinButton.hide()
 

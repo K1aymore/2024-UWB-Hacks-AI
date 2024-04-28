@@ -78,7 +78,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if %BossLabel.visible_characters != -1:
-		bossTextChars += delta * 8
+		bossTextChars += delta * 12
 		%BossLabel.visible_characters = bossTextChars
 
 

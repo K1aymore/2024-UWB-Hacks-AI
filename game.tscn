@@ -361,7 +361,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="TextTimer" type="Timer" parent="."]
-wait_time = 45.0
+wait_time = 75.0
 autostart = true
 
 [node name="WinMessage" type="MarginContainer" parent="."]

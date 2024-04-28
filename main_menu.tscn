@@ -159,17 +159,17 @@ texture = ExtResource("4_qjcg6")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="Types" type="TextureRect" parent="Tutorial/Tutorial/TabContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("5_hhwp5")
-expand_mode = 5
-stretch_mode = 5
-
 [node name="Resources" type="TextureRect" parent="Tutorial/Tutorial/TabContainer"]
 visible = false
 layout_mode = 2
 texture = ExtResource("6_cu3yw")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Types" type="TextureRect" parent="Tutorial/Tutorial/TabContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("5_hhwp5")
 expand_mode = 5
 stretch_mode = 5
 

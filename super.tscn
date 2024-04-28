@@ -178,7 +178,8 @@ scale = Vector2(0.9, 0.9)
 sprite_frames = SubResource("SpriteFrames_h5qfl")
 offset = Vector2(50, -50)
 
-[node name="ContinueButton" type="Button" parent="Store/Booster"]
+[node name="ContinueButton" type="Button" parent="Store"]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -309,7 +310,7 @@ text = "Close"
 [connection signal="cardAdded" from="Store" to="." method="_on_store_card_added"]
 [connection signal="cardAdded" from="Store" to="Game" method="_on_store_card_added"]
 [connection signal="text_submitted" from="Store/StoreMenu/VBoxContainer/VBoxContainer/LineEdit" to="Store" method="_on_line_edit_text_submitted"]
-[connection signal="pressed" from="Store/Booster/ContinueButton" to="Store" method="_on_continue_button_pressed"]
+[connection signal="pressed" from="Store/ContinueButton" to="Store" method="_on_continue_button_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/ResumeButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

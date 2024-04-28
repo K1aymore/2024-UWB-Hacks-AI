@@ -28,6 +28,7 @@ var targetGreen := STARTING_TARGET_GREEN
 
 var levelNumber := 1
 
+var bossTextChars := 0.0
 
 var city : CITY
 
@@ -43,23 +44,23 @@ enum CITY {
 var bossSayings = {
 	CITY.Seattle: ["Haha I've polluted Seattle lmao",
 		"Saving the planet is so basic #SmogGoals",
-		"Needs more smog, 3/10"],
+		"3/10 needs more smog"],
 	CITY.SanFrancisco: ["I've hid the toxic waste where you'll never find it!",
 		"They call it pollution, I call it my secret sauce for success!",
 		"I'd rather see the bay filled with industry than marine life!",
-		"Nature's wonders pale in comparison to urban development"],
-	CITY.Austin: ["Oil makes the world go round",
-		"I sure love the smell of oil in the morning",
+		"Nature's wonders pale in comparison to urban development."],
+	CITY.Austin: ["Oil makes the world go 'round.",
+		"I sure love the smell of oil in the morning.",
 		"I'm not just leaving footprints; I'm leaving toxic trails of destruction!",
 		"Reduce, reuse, recycle? I reckon it's 'drill, extract, refill' for me.",
 		"I ain't just pumpin' oil, I'm wranglin' opportunities in chaos!"],
 	CITY.Miami: ["Blub blub", "Gurgle gurgle", "*Squish*",],
-	CITY.NewYork: ["Trees are good fuel for the economy",
-		"Organic? Please, my evil schemes are the only things I cultivate",
-		"Carbon footprints are the concerns of lesser men"],
+	CITY.NewYork: ["Trees are good fuel for the economy.",
+		"Organic? Please, my evil schemes are the only things I cultivate.",
+		"Carbon footprints are the concerns of lesser men."],
 	CITY.Sahara: ["You thought you could beat us one by one, but now we are many!",
 		"We have the power of friendship and pollution on our side!",
-		"We're lobbying the government"],
+		"We're lobbying the government."],
 }
 
 
@@ -73,6 +74,12 @@ func _ready() -> void:
 	for child in startingCards:
 		addCard(child)
 	
+
+
+func _process(delta: float) -> void:
+	if %BossLabel.visible_characters != -1:
+		bossTextChars += delta * 8
+		%BossLabel.visible_characters = bossTextChars
 
 
 
@@ -120,6 +127,8 @@ func playCard(card : Card):
 	if card.type == Card.TYPE.ANIMAL && card.water > water:
 		textPopup("Not enough water")
 		return
+	
+	$CardPlaySound.play()
 	
 	match card.type:
 		Card.TYPE.PLANT:
@@ -254,8 +263,7 @@ func newLevel():
 	$Background.texture = load("res://CityArt/" + str(CITY.keys()[levelNumber - 1]).to_lower() + ".jpg")
 	$Boss.texture = load("res://Characters/" + str(CITY.keys()[levelNumber - 1]).to_lower() + ".png")
 	
-	%BossLabel.text = bossSayings[levelNumber-1].pick_random()
-	$TextTimer.start()
+	bossNewText()
 	
 	if levelNumber == 6:
 		targetGreen = 99999
@@ -274,4 +282,11 @@ func _on_store_card_added(card: Card) -> void:
 
 
 func _on_text_timer_timeout() -> void:
+	bossNewText()
+
+
+func bossNewText():
+	$TextTimer.start()
+	bossTextChars = 0
+	%BossLabel.visible_characters = 0
 	%BossLabel.text = bossSayings[levelNumber-1].pick_random()

@@ -118,6 +118,7 @@ func _on_request_completed(result, response_code, headers, body):
 	card.position = %BoosterPack.position
 	slidingAnim = true
 	$BoosterOpenSound.play()
+	$ContinueButton.show()
 	
 
 
@@ -129,6 +130,7 @@ func continueToGame():
 	%BoosterPack.position = Vector2(500, 500)
 	$StoreMenu.show()
 	%Booster.hide()
+	$ContinueButton.hide()
 	
 	cardAdded.emit(myCard)
 	myCard = null

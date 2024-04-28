@@ -13,6 +13,7 @@ config_version=5
 config/name="2024 UWB Hacks AI"
 run/main_scene="res://main_menu.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
+boot_splash/image="res://index.png"
 config/icon="res://icon.svg"
 
 [display]

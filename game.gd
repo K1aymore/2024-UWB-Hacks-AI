@@ -224,7 +224,7 @@ func resetDeck():
 
 
 func win():
-	%WinLabel.text = "You beat " + CITY.keys()[levelNumber - 1]
+	%WinLabel.text = "You cleaned " + CITY.keys()[levelNumber - 1] + "!"
 	$WinMessage.show()
 	$VictorySound.play()
 	if levelNumber == 6:

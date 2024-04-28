@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c1iyo0ed5ac0k" path="res://Tutorial/stage1.png" id="4_qjcg6"]
 [ext_resource type="Texture2D" uid="uid://dvepm56wu0wi" path="res://Tutorial/stage2.png" id="5_hhwp5"]
 [ext_resource type="Texture2D" uid="uid://cwattxbpp1dp2" path="res://Tutorial/stage3.png" id="6_cu3yw"]
-[ext_resource type="Texture2D" uid="uid://cf681i5067fxl" path="res://Tutorial/stage34.png" id="6_rht7a"]
+[ext_resource type="Texture2D" uid="uid://7r7fa6rm0gko" path="res://Tutorial/stage4.png" id="8_nu8hf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6xid8"]
 bg_color = Color(0, 0, 0, 0.858824)
@@ -176,7 +176,7 @@ stretch_mode = 5
 [node name="Turns" type="TextureRect" parent="Tutorial/Tutorial/TabContainer"]
 visible = false
 layout_mode = 2
-texture = ExtResource("6_rht7a")
+texture = ExtResource("8_nu8hf")
 expand_mode = 5
 stretch_mode = 5
 

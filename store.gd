@@ -14,7 +14,7 @@ signal cardAdded(card : Card)
 
 func _process(delta: float) -> void:
 	if slidingAnim:
-		%BoosterPack.position.y += delta * 800
+		%BoosterPack.position.y += delta * 600
 
 
 

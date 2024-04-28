@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ds6tba53kruv4"]
+[gd_scene load_steps=18 format=3 uid="uid://ds6tba53kruv4"]
 
 [ext_resource type="Theme" uid="uid://crsd6qx2yqvr7" path="res://new_theme.tres" id="1_i4qe1"]
 [ext_resource type="Script" path="res://game.gd" id="2_xtvks"]
@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://dk4xmeownqld4" path="res://Sounds/vine-boom.ogg" id="12_1vfxt"]
 [ext_resource type="PackedScene" uid="uid://brrgw8fnx18rd" path="res://button_sound.tscn" id="13_p1c3t"]
 [ext_resource type="AudioStream" uid="uid://b07hrsmy2v0y" path="res://Sounds/434472__dersuperanton__taking-card.wav" id="14_cmhyr"]
+[ext_resource type="Texture2D" uid="uid://4dg6lh4ulmy0" path="res://Characters/seattle.png" id="16_ktuu6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qe6lt"]
 bg_color = Color(0.686275, 0.870588, 0.968627, 1)
@@ -29,6 +30,15 @@ grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("1_i4qe1")
 script = ExtResource("2_xtvks")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.481789, 0.481789, 0.481789, 1)
 
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0.913725)
@@ -304,6 +314,9 @@ stream = ExtResource("14_cmhyr")
 volume_db = 10.0
 
 [node name="Boss" type="Sprite2D" parent="."]
+position = Vector2(1418, 263)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("16_ktuu6")
 
 [node name="WinMessage" type="MarginContainer" parent="."]
 process_mode = 3

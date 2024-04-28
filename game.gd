@@ -73,11 +73,14 @@ func newTurn():
 	if water < 0:
 		var waterDeficit = abs(water)
 		greenProduction -= waterDeficit
-		energyProduction -= waterDeficit / 3
+		energyProduction -= waterDeficit
 		waterProduction += waterDeficit / 2
 		water = 0
 		energyProduction = 0 if energyProduction < 0 else energyProduction
 		greenProduction = 0 if greenProduction < 0 else greenProduction
+	
+	if energy < 0:
+		energy = 0
 	
 	if green > targetGreen:
 		win()
@@ -226,6 +229,7 @@ func newLevel():
 	targetGreen = STARTING_TARGET_GREEN * levelNumber
 	
 	$Background.texture = load("res://CityArt/" + str(CITY.keys()[levelNumber - 1]).to_lower() + ".jpg")
+	$Boss.texture = load("res://Characters/" + str(CITY.keys()[levelNumber - 1]).to_lower() + ".png")
 	
 	if levelNumber == 6:
 		targetGreen = 99999

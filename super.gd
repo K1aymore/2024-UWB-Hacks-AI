@@ -29,8 +29,11 @@ func pause():
 func unpause():
 	get_tree().paused = false
 	$Menu.hide()
+	$Tutorial.hide()
 	if inStore:
 		store()
+	else:
+		game()
 
 
 func store():
@@ -57,3 +60,11 @@ func _on_store_card_added(card: Card) -> void:
 
 func _on_game_won_level() -> void:
 	store()
+
+
+func _on_tutorial_button_pressed() -> void:
+	$Tutorial.show()
+
+
+func _on_close_tutorial_button_pressed() -> void:
+	$Tutorial.hide()

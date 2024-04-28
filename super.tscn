@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bda7wearo4qjn"]
+[gd_scene load_steps=19 format=3 uid="uid://bda7wearo4qjn"]
 
 [ext_resource type="PackedScene" uid="uid://ds6tba53kruv4" path="res://game.tscn" id="1_4rris"]
 [ext_resource type="Script" path="res://super.gd" id="1_4641i"]
@@ -7,6 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://ul3iv2p0sw1h" path="res://CardArt/booster_pack.png" id="4_nf526"]
 [ext_resource type="Texture2D" uid="uid://bjhva45waillk" path="res://Characters/Shopkeeper.png" id="4_rbbtf"]
 [ext_resource type="Texture2D" uid="uid://wl7ccv6yakje" path="res://CardArt/booster_open.png" id="5_8mpu2"]
+[ext_resource type="Texture2D" uid="uid://bilis8da4ekmi" path="res://Tutorial/stage0.png" id="8_1orv6"]
+[ext_resource type="Texture2D" uid="uid://c1iyo0ed5ac0k" path="res://Tutorial/stage1.png" id="9_drsqk"]
+[ext_resource type="Texture2D" uid="uid://dvepm56wu0wi" path="res://Tutorial/stage2.png" id="10_ij62r"]
+[ext_resource type="Texture2D" uid="uid://cwattxbpp1dp2" path="res://Tutorial/stage3.png" id="11_gnsd0"]
+[ext_resource type="Texture2D" uid="uid://cf681i5067fxl" path="res://Tutorial/stage34.png" id="12_ixpek"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1f1da"]
 atlas = ExtResource("4_rbbtf")
@@ -190,7 +195,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PlayButton" type="Button" parent="Menu/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
 text = "Resume"
 
@@ -202,10 +207,84 @@ text = "Tutorial"
 layout_mode = 2
 text = "Quit"
 
+[node name="Tutorial" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tutorial" type="MarginContainer" parent="Tutorial"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 100
+
+[node name="TabContainer" type="TabContainer" parent="Tutorial/Tutorial"]
+layout_mode = 2
+
+[node name="Store" type="TextureRect" parent="Tutorial/Tutorial/TabContainer"]
+layout_mode = 2
+texture = ExtResource("8_1orv6")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Hand" type="TextureRect" parent="Tutorial/Tutorial/TabContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("9_drsqk")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Types" type="TextureRect" parent="Tutorial/Tutorial/TabContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("10_ij62r")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Resources" type="TextureRect" parent="Tutorial/Tutorial/TabContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("11_gnsd0")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Turns" type="TextureRect" parent="Tutorial/Tutorial/TabContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("12_ixpek")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="CloseTutorialButton" type="Button" parent="Tutorial"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -127.0
+offset_right = -30.0
+offset_bottom = -70.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Close"
+
 [connection signal="wonLevel" from="Game" to="." method="_on_game_won_level"]
 [connection signal="cardAdded" from="Store" to="." method="_on_store_card_added"]
 [connection signal="cardAdded" from="Store" to="Game" method="_on_store_card_added"]
 [connection signal="text_submitted" from="Store/StoreMenu/VBoxContainer/VBoxContainer/LineEdit" to="Store" method="_on_line_edit_text_submitted"]
-[connection signal="pressed" from="Menu/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/TutorialButton" to="Menu" method="_on_tutorial_button_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/ResumeButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Tutorial/CloseTutorialButton" to="." method="_on_close_tutorial_button_pressed"]

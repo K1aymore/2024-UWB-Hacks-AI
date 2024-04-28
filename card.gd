@@ -51,22 +51,19 @@ func _ready() -> void:
 
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton && event.pressed == true:
-		if event.button_index == 1:
-			played.emit(self)
-		if event.button_index == 2:
-			recycled.emit(self)
+		played.emit(self)
 
 
 
 func getEnergyCost() -> int:
+	
+	if type == TYPE.PLANT:
+		return green + energy - water
+	
 	if type == TYPE.ANIMAL:
 		return 0
 	
-	var cost := green + energy
-	
 	if type == TYPE.WEATHER:
-		cost += water
-	else:
-		cost -= water
+		return (green + energy + water) / level
 	
-	return cost / level
+	return 0

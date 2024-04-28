@@ -5,14 +5,16 @@ var cardScene := preload("res://card.tscn")
 var myCard : Card
 var cardTitle : String
 
+var cardSubmitted := false
 
 signal cardAdded(card : Card)
 
 
 
 func _on_line_edit_text_submitted(new_text: String) -> void:
-	%LineEdit.text = ""
-	generateCard(new_text)
+	if !cardSubmitted:
+		cardSubmitted = true
+		generateCard(new_text)
 
 
 func generateCard(title : String):
@@ -98,15 +100,16 @@ func _on_request_completed(result, response_code, headers, body):
 		card.water *= currentLevel
 	
 	if card.type == Card.TYPE.ANIMAL:
-		card.energy *= 5
+		card.energy *= 3
 	
 	card.level = currentLevel
 	
 	myCard = card
 	$BoosterPack.add_child(card)
-
-
-
+	
+	%LineEdit.text = ""
+	cardSubmitted = false
+	
 	cardAdded.emit(myCard)
 
 

@@ -36,13 +36,15 @@ theme = ExtResource("3_kttds")
 [node name="Title" type="Label" parent="Control"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = -77.0
+offset_left = -93.0
 offset_top = -161.0
-offset_right = 119.0
+offset_right = 139.0
 offset_bottom = -116.0
 size_flags_horizontal = 3
 text = "Title"
 horizontal_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 3
 
 [node name="Generation" type="Label" parent="Control"]
 unique_name_in_owner = true
